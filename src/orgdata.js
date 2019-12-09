@@ -771,6 +771,530 @@ export default {
       "serviceId": "028740351",
       "subTotalBeforeTaxes": "2300.00",
       "serviceAccountNumber": "28740351"
+    },
+    {
+      "subTotalToBePaid": "2507.00",
+      "chargeEvents": {
+        "subTotalToBePaid": "698.54",
+        "subTotalNumberOfEvents": 3,
+        "eventsById": [
+          {
+            "subTotalToBePaid": "698.538263",
+            "derivedEventId": "613b93a2-535e-44bd-8668-e386625caf89",
+            "eventsBySubtype": [
+              {
+                "eventSubtypeLabel": "Local",
+                "subTotalNumberOfEvents": 3,
+                "subTotalPrice": "601.500",
+                "subTotalNumberOfUnits": "6",
+                "subTotalIncludedRatingDiscounts": "0",
+                "events": [
+                  {
+                    "eventDiscount": "0.00",
+                    "volumeUpload": "0",
+                    "eventDestinationDescription": "MTN to AIRTEL",
+                    "volumeDownload": "0",
+                    "eventPrice": "300.500",
+                    "eventVisitedNetwork": "Off-net",
+                    "eventOriginatorId": "123456789",
+                    "eventReceiverId": "233247640302",
+                    "eventTime": "2019-05-23T16:21:14",
+                    "eventDescription": "CDR23_05_2019-4th.txt",
+                    "eventUnits": "2",
+                    "roundedCharge": "300.5",
+                    "eventSegregation": "International"
+                  },
+                  {
+                    "eventDiscount": "0.00",
+                    "volumeUpload": "0",
+                    "eventDestinationDescription": "MTN to AIRTEL",
+                    "volumeDownload": "0",
+                    "eventPrice": "200.500",
+                    "eventVisitedNetwork": "Off-net",
+                    "eventOriginatorId": "123456789",
+                    "eventReceiverId": "233247640302",
+                    "eventTime": "2019-05-23T16:21:12",
+                    "eventDescription": "CDR23_05_2019-4th.txt",
+                    "eventUnits": "2",
+                    "roundedCharge": "200.5",
+                    "eventSegregation": "International"
+                  },
+                  {
+                    "eventDiscount": "0.00",
+                    "volumeUpload": "0",
+                    "eventDestinationDescription": "MTN to AIRTEL",
+                    "volumeDownload": "0",
+                    "eventPrice": "100.500",
+                    "eventVisitedNetwork": "Off-net",
+                    "eventOriginatorId": "123456789",
+                    "eventReceiverId": "233247640302",
+                    "eventTime": "2019-05-23T16:21:10",
+                    "eventDescription": "CDR23_05_2019-4th.txt",
+                    "eventUnits": "2",
+                    "roundedCharge": "100.5",
+                    "eventSegregation": "International"
+                  }
+                ]
+              }
+            ],
+            "subTotalNumberOfEvents": 3,
+            "eventLabel": "b351728e-1f43-4ae2-bd2f-cb00f0d81d4e",
+            "subTotalNumberOfUnits": "6",
+            "subTotalDiscounts": "42.11",
+            "glCode": "",
+            "subTotalIncludedRatingDiscounts": "0",
+            "subTotalBeforeDiscounts": "601.50",
+            "subTotalTaxes": "139.148263",
+            "subTotalBeforeTaxes": "559.39"
+          },
+          {
+            "subTotalToBePaid": "698.538263",
+            "derivedEventId": "613b93a2-535e-44bd-8668-e386625caf89",
+            "eventsBySubtype": [
+              {
+                "eventSubtypeLabel": "Local",
+                "subTotalNumberOfEvents": 3,
+                "subTotalPrice": "601.500",
+                "subTotalNumberOfUnits": "6",
+                "subTotalIncludedRatingDiscounts": "0",
+                "events": [
+                  {
+                    "eventDiscount": "0.00",
+                    "volumeUpload": "0",
+                    "eventDestinationDescription": "MTN to AIRTEL",
+                    "volumeDownload": "0",
+                    "eventPrice": "300.500",
+                    "eventVisitedNetwork": "Off-net",
+                    "eventOriginatorId": "123456789",
+                    "eventReceiverId": "233247640302",
+                    "eventTime": "2019-05-23T16:21:14",
+                    "eventDescription": "CDR23_05_2019-4th.txt",
+                    "eventUnits": "2",
+                    "roundedCharge": "300.5",
+                    "eventSegregation": "International"
+                  },
+                  {
+                    "eventDiscount": "0.00",
+                    "volumeUpload": "0",
+                    "eventDestinationDescription": "MTN to AIRTEL",
+                    "volumeDownload": "0",
+                    "eventPrice": "200.500",
+                    "eventVisitedNetwork": "Off-net",
+                    "eventOriginatorId": "123456789",
+                    "eventReceiverId": "233247640302",
+                    "eventTime": "2019-05-23T16:21:12",
+                    "eventDescription": "CDR23_05_2019-4th.txt",
+                    "eventUnits": "2",
+                    "roundedCharge": "200.5",
+                    "eventSegregation": "International"
+                  },
+                  {
+                    "eventDiscount": "0.00",
+                    "volumeUpload": "0",
+                    "eventDestinationDescription": "MTN to AIRTEL",
+                    "volumeDownload": "0",
+                    "eventPrice": "100.500",
+                    "eventVisitedNetwork": "Off-net",
+                    "eventOriginatorId": "123456789",
+                    "eventReceiverId": "233247640302",
+                    "eventTime": "2019-05-23T16:21:10",
+                    "eventDescription": "CDR23_05_2019-4th.txt",
+                    "eventUnits": "2",
+                    "roundedCharge": "100.5",
+                    "eventSegregation": "International"
+                  }
+                ]
+              }
+            ],
+            "subTotalNumberOfEvents": 3,
+            "eventLabel": "b351728e-1f43-4ae2-bd2f-cb00f0d81d4e",
+            "subTotalNumberOfUnits": "6",
+            "subTotalDiscounts": "42.11",
+            "glCode": "",
+            "subTotalIncludedRatingDiscounts": "0",
+            "subTotalBeforeDiscounts": "601.50",
+            "subTotalTaxes": "139.148263",
+            "subTotalBeforeTaxes": "559.39"
+          },
+          {
+            "subTotalToBePaid": "698.538263",
+            "derivedEventId": "c3ed6e52-18e9-43fe-9f5d-7c13ccb5d720",
+            "eventsBySubtype": [
+              {
+                "eventSubtypeLabel": "Local",
+                "subTotalNumberOfEvents": 3,
+                "subTotalPrice": "601.500",
+                "subTotalNumberOfUnits": "6",
+                "subTotalIncludedRatingDiscounts": "0",
+                "events": [
+                  {
+                    "eventDiscount": "0.00",
+                    "volumeUpload": "0",
+                    "eventDestinationDescription": "MTN to AIRTEL",
+                    "volumeDownload": "0",
+                    "eventPrice": "300.500",
+                    "eventVisitedNetwork": "On-net",
+                    "eventOriginatorId": "123456789",
+                    "eventReceiverId": "233247640302",
+                    "eventTime": "2019-05-23T16:21:14",
+                    "eventDescription": "CDR23_05_2019-4th.txt",
+                    "eventUnits": "2",
+                    "roundedCharge": "300.5",
+                    "eventSegregation": "International"
+                  },
+                  {
+                    "eventDiscount": "0.00",
+                    "volumeUpload": "0",
+                    "eventDestinationDescription": "MTN to AIRTEL",
+                    "volumeDownload": "0",
+                    "eventPrice": "200.500",
+                    "eventVisitedNetwork": "On-net",
+                    "eventOriginatorId": "123456789",
+                    "eventReceiverId": "233247640302",
+                    "eventTime": "2019-05-23T16:21:12",
+                    "eventDescription": "CDR23_05_2019-4th.txt",
+                    "eventUnits": "2",
+                    "roundedCharge": "200.5",
+                    "eventSegregation": "International"
+                  },
+                  {
+                    "eventDiscount": "0.00",
+                    "volumeUpload": "0",
+                    "eventDestinationDescription": "MTN to AIRTEL",
+                    "volumeDownload": "0",
+                    "eventPrice": "100.500",
+                    "eventVisitedNetwork": "On-net",
+                    "eventOriginatorId": "123456789",
+                    "eventReceiverId": "233247640302",
+                    "eventTime": "2019-05-23T16:21:10",
+                    "eventDescription": "CDR23_05_2019-4th.txt",
+                    "eventUnits": "2",
+                    "roundedCharge": "100.5",
+                    "eventSegregation": "International"
+                  }
+                ]
+              }
+            ],
+            "subTotalNumberOfEvents": 3,
+            "eventLabel": "b351728e-1f43-4ae2-bd2f-cb00f0d81d4e",
+            "subTotalNumberOfUnits": "6",
+            "subTotalDiscounts": "42.11",
+            "glCode": "",
+            "subTotalIncludedRatingDiscounts": "0",
+            "subTotalBeforeDiscounts": "601.50",
+            "subTotalTaxes": "139.148263",
+            "subTotalBeforeTaxes": "559.39"
+          }
+        ],
+        "subTotalDiscounts": "42.11",
+        "subTotalIncludedRatingDiscounts": "0.00",
+        "subTotalBeforeDiscounts": "601.50",
+        "subTotalTaxes": "139.15",
+        "subTotalBeforeTaxes": "559.39"
+      },
+      "serviceAccountLabel": "Pravi",
+      "taxesSummary": {
+        "taxesByTaxPlan": [
+          {
+            "subTotal": "2507.00",
+            "taxPlanName": "aa915db2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+            "items": 3,
+            "taxes": "207.00",
+            "beforeTaxes": "2300.00"
+          }
+        ],
+        "totalBeforeTaxes": "2300.00",
+        "taxesTotal": "207.00",
+        "totalGross": "2507.00"
+      },
+      "itemizedFlag": "N",
+      "onetimeCharges": {
+        "subTotalToBePaid": "327.00",
+        "items": [
+          {
+            "totalTaxValue": "22.50",
+            "toBePaidBeforeTaxes": "250.00",
+            "toBePaid": "272.50",
+            "offeringCode": "BoltonOffers",
+            "taxPlanName": "aa915db2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+            "price": "250.00",
+            "offeringName": "12375892-4839-4144-a9b7-e6f78b0e4d8a",
+            "installmentSequence": "1 / 1",
+            "taxes": {
+              "taxesByTaxPlan": [
+                {
+                  "taxPlanFormulaId": "aab15db2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+                  "taxPlanFormulaName": "9 Percent Formula",
+                  "glCode": "601",
+                  "taxValue": "22.50"
+                }
+              ]
+            },
+            "chargeName": "aab95db2-7b1f-4144-a9b7-e6f78b0e4d8a",
+            "metadata": {
+              "offeringId": "12375892-4839-4144-a9b7-e6f78b0e4d8a",
+              "chargeType": "OneTimeInstallments(1)",
+              "glCode": "401",
+              "chargeId": "aab95db2-7b1f-4144-a9b7-e6f78b0e4d8a",
+              "sacId": 403,
+              "offeringType": "OptionalOffering"
+            },
+            "paymentMethod": "online",
+            "activationDateTime": "2019-05-23T16:21:14"
+          },
+          {
+            "totalTaxValue": "4.50",
+            "toBePaidBeforeTaxes": "50.00",
+            "toBePaid": "54.50",
+            "offeringCode": "WSWD",
+            "taxPlanName": "aa915db2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+            "price": "200.00",
+            "offeringName": "12573a1b-fc7b-4a20-9048-0474a1986698",
+            "installmentSequence": "1 / 4",
+            "taxes": {
+              "taxesByTaxPlan": [
+                {
+                  "taxPlanFormulaId": "aab15db2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+                  "taxPlanFormulaName": "9 Percent Formula",
+                  "glCode": "601",
+                  "taxValue": "4.50"
+                }
+              ]
+            },
+            "chargeName": "aab95db2-7b1f-4144-a9b7-e6f78b0e4d8a",
+            "metadata": {
+              "offeringId": "12573a1b-fc7b-4a20-9048-0474a1986698",
+              "chargeType": "OneTimeInstallments(4)",
+              "glCode": "401",
+              "chargeId": "aab95db2-7b1f-4144-a9b7-e6f78b0e4d8a",
+              "sacId": 402,
+              "offeringType": "MandatoryOffering"
+            }
+          },
+          {
+            "totalTaxValue": "4.50",
+            "toBePaidBeforeTaxes": "50.00",
+            "toBePaid": "54.50",
+            "offeringCode": "WSWD",
+            "taxPlanName": "aa915db2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+            "price": "200.00",
+            "offeringName": "12573a1b-fc7b-4a20-9048-0474a1986698",
+            "installmentSequence": "1 / 4",
+            "taxes": {
+              "taxesByTaxPlan": [
+                {
+                  "taxPlanFormulaId": "aab15db2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+                  "taxPlanFormulaName": "9 Percent Formula",
+                  "glCode": "601",
+                  "taxValue": "4.50"
+                }
+              ]
+            },
+            "chargeName": "aab95db2-7b1f-4144-a9b7-e6f78b0e4d8a",
+            "metadata": {
+              "offeringId": "12573a1b-9876-4a20-9048-4567a1986698",
+              "chargeType": "OneTimeInstallments(4)",
+              "glCode": "401",
+              "chargeId": "212f3fcf-bfb9-480d-9d6e-f54e01f5fbc3",
+              "sacId": 402,
+              "offeringType": "MandatoryOffering"
+            }
+          }
+        ],
+        "subTotalDiscounts": "0.00",
+        "subTotalBeforeDiscounts": "300.00",
+        "subTotalTaxes": "27.00",
+        "subTotalBeforeTaxes": "300.00"
+      },
+      "deposits": {
+        "items": [],
+        "subTotalDepositsPaid": "0.00",
+        "subTotalDepositsToBeRefunded": "0.00"
+      },
+      "taxes": {
+        "taxesByTaxPlan": [
+          {
+            "taxPlanFormulaId": "aab15db2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+            "taxPlanFormulaName": "9 Percent Formula",
+            "glCode": "601",
+            "taxValue": "207.00"
+          }
+        ]
+      },
+      "pausedDates": {
+        "dates": []
+      },
+      "subTotalDiscounts": "0.00",
+      "subTotalIncludedRatingDiscounts": "0.00",
+      "discounts": {
+        "items": [
+          {
+            "discountOrigin": "BillingAccount",
+            "discountSubTotal": "5.65",
+            "metadata": {
+              "discountId": "945fa7db-d74e-4c3b-baa5-b16fc8aeb8c1",
+              "discountTarget": "EntireInvoice"
+            }
+          }
+        ],
+        "discountsTotal": "5.65"
+      },
+      "metadata": {
+        "lob": "",
+        "serviceName": "Pravi",
+        "serviceAccountId": "642b3920-15c9-4678-bfdd-042a415fbce8",
+        "serviceEmailId": "pravi1@gmail.com",
+        "subServiceType": ""
+      },
+      "periodStart": "2019-11-01",
+      "subTotalBeforeDiscounts": "2300.00",
+      "subTotalTaxes": "207.00",
+      "upfrontPayments": {
+        "items": [
+          {
+            "totalTaxValue": "0.00",
+            "offeringCode": "offerCode10",
+            "taxPlanName": "40000000-0000-0000-0000-000000000001",
+            "price": "10000.00",
+            "offeringName": "13000000-0000-0000-0000-000000000010",
+            "taxes": {
+              "taxesByTaxPlan": []
+            },
+            "alreadyPaid": "10000.00",
+            "chargeName": "50000000-0000-0000-0000-000000000001",
+            "metadata": {
+              "offeringId": "12573900-fc7b-9876-9048-0474a1986698",
+              "chargeType": "OneTimeUpfront",
+              "glCode": "glcode1",
+              "chargeId": "aab95db2-7b1f-4144-a9b7-e6f78b0e4d8a",
+              "sacId": 113,
+              "offeringType": "MandatoryOffering"
+            },
+            "activationDateTime": "2019-05-23T16:21:14",
+            "paymentMethod": "upFront"
+          },
+          {
+            "totalTaxValue": "0.00",
+            "offeringCode": "offerCode10",
+            "taxPlanName": "40000000-0000-0000-0000-000000000001",
+            "price": "10000.00",
+            "offeringName": "13000000-0000-0000-0000-000000000010",
+            "taxes": {
+              "taxesByTaxPlan": []
+            },
+            "alreadyPaid": "10000.00",
+            "chargeName": "50000000-0000-0000-0000-000000000001",
+            "metadata": {
+              "offeringId": "13000000-0000-0000-0000-000000000010",
+              "chargeType": "OneTimeUpfront",
+              "glCode": "glcode1",
+              "chargeId": "50000000-0000-0000-0000-000000000002",
+              "sacId": 113,
+              "offeringType": "MandatoryOffering"
+            },
+            "activationDateTime": "2019-05-23T16:21:14",
+            "paymentMethod": "online"
+          },
+          {
+            "totalTaxValue": "0.00",
+            "offeringCode": "offerCode10",
+            "taxPlanName": "40000000-0000-0000-0000-000000000001",
+            "price": "10000.00",
+            "offeringName": "13000000-0000-0000-0000-000000000010",
+            "taxes": {
+              "taxesByTaxPlan": []
+            },
+            "alreadyPaid": "10000.00",
+            "chargeName": "50000000-0000-0000-0000-000000000001",
+            "metadata": {
+              "offeringId": "13000000-0000-0000-0000-000000000010",
+              "chargeType": "OneTimeUpfront",
+              "glCode": "glcode1",
+              "chargeId": "50000000-0000-0000-0000-000000000003",
+              "sacId": 113,
+              "offeringType": "MandatoryOffering"
+            },
+            "activationDateTime": "2019-05-23T16:21:14",
+            "paymentMethod": "online"
+          }
+        ],
+        "subTotalBeforeTaxes": "10000.00",
+        "subTotalTaxes": "0.00",
+        "subTotalAlreadyPaid": "10000.00"
+      },
+      "recurringCharges": {
+        "subTotalToBePaid": "2180.00",
+        "items": [
+          {
+            "totalTaxValue": "180.00",
+            "toBePaidBeforeTaxes": "2000.00",
+            "toBePaid": "2180.00",
+            "offeringCode": "WSWD",
+            "taxPlanName": "aa915db2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+            "price": "2000.00",
+            "offeringName": "12573a1b-fc7b-4a20-9048-0474a1986698",
+            "taxes": {
+              "taxesByTaxPlan": [
+                {
+                  "taxPlanFormulaId": "aab15db2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+                  "taxPlanFormulaName": "9 Percent Formula",
+                  "glCode": "601",
+                  "taxValue": "180.00"
+                }
+              ]
+            },
+            "chargeName": "aab955b2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+            "metadata": {
+              "offeringId": "12573a1b-fc7b-4a20-9048-0474a1986698",
+              "chargeType": "RecurringInArrearsProrated",
+              "glCode": "401",
+              "chargeId": "aab955b2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+              "sacId": 401,
+              "offeringType": "MandatoryOffering"
+            },
+            "periodStart": "2019-11-01",
+            "periodEnd": "2019-11-30"
+          },
+          {
+            "totalTaxValue": "180.00",
+            "toBePaidBeforeTaxes": "2000.00",
+            "toBePaid": "2180.00",
+            "offeringCode": "WSWD",
+            "taxPlanName": "aa915db2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+            "price": "2000.00",
+            "offeringName": "12573a1b-fc7b-4a20-9048-0474a1986698",
+            "taxes": {
+              "taxesByTaxPlan": [
+                {
+                  "taxPlanFormulaId": "aab15db2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+                  "taxPlanFormulaName": "9 Percent Formula",
+                  "glCode": "601",
+                  "taxValue": "180.00"
+                }
+              ]
+            },
+            "chargeName": "aab955b2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+            "metadata": {
+              "offeringId": "12573a1b-fc7b-4a20-9048-0474a1986698",
+              "chargeType": "RecurringInArrearsProrated",
+              "glCode": "401",
+              "chargeId": "aab955b2-7b1f-4f44-a9b7-e6f78b0e4d8a",
+              "sacId": 401,
+              "offeringType": "MandatoryOffering"
+            },
+            "periodStart": "2019-11-01",
+            "periodEnd": "2019-11-30"
+          }
+        ],
+        "subTotalDiscounts": "0.00",
+        "subTotalBeforeDiscounts": "2000.00",
+        "subTotalTaxes": "180.00",
+        "subTotalBeforeTaxes": "2000.00"
+      },
+      "periodEnd": "2019-11-30",
+      "serviceId": "028740351",
+      "subTotalBeforeTaxes": "2300.00",
+      "serviceAccountNumber": "28740351"
     }
   ],
   "chargesAndEventsSummary": {

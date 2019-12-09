@@ -16,7 +16,7 @@
       <div class="actions">
         <div
           class="action"
-          @click="addProcedure('addfeild',{
+          @click="addProcedure('fieldAdd',{
           parent:selected.target ,
           name: window.prompt('name of field'),
           data:'{}'
@@ -24,7 +24,7 @@
         >+ {}</div>
         <div
           class="action"
-          @click="addProcedure('addfeild',{
+          @click="addProcedure('fieldAdd',{
           parent:selected.target,
           name:window.prompt('name of field'),
           data:'[]'
@@ -33,7 +33,7 @@
         <div
           class="action"
           @click="addProcedure(
-          'copy',
+          'fieldCopy',
           {
            from:selected.origin,
            to: selected.target
@@ -44,7 +44,7 @@
         <div
           class="action"
           @click="addProcedure(
-          'removefeild',
+          'fieldRemove',
           {
            path: selected.target
           }
@@ -77,7 +77,7 @@
     </div>
     <div class="procedures list-group">
       <div class="actions">
-        <div class="btn btn-success" @click="addnewprocedure()">Add Grouping</div>
+        <div class="btn btn-success" @click="addnewprocedure()">Add Step</div>
         <div class="btn btn-info float-right" @click="runProcedures()">Process All</div>
         <div class="btn btn-secondary float-right mx-2" @click="saveprocedures()">Save</div>
         <div class="btn btn-secondary float-right" @click="loadprocedures()">Load</div>
@@ -112,21 +112,24 @@
             {{p.error}}
           </div>
           <div class="editinfo" v-else>
-            <div class="input-group mb-3">
+            <div class="row">
+            <div class="input-group mb-4 col-6">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Name</span>
+                <span class="bg-warning  text-light input-group-text" id="basic-addon1">Name</span>
               </div>
               <input type="text" class="form-control" placeholder="Name" v-model="p.name" />
             </div>
-            <!-- <div class="input-group mb-3">
+            <div class="input-group mb-4 col-6">
               <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Procedures</label>
+                <label class="bg-primary text-light input-group-text" for="inputGroupSelect01">Action Type</label>
               </div>
-              <select class="custom-select" id="inputGroupSelect01" v-model="p.type">
-                <option v-for="(t,index) in ['addfeild','copy','removefeild']" :key="index" :value="t">{{t}}</option>
+              <select class="custom-select" id="inputGroupSelect01" v-model="p.type" @change="setstepconfig(p)">
+                <option v-for="(t,index) in actiontypes" :key="index" :value="t">{{t}}</option>
               </select>
-            </div>-->
-            <div>procedure : {{p.type}}</div>
+            </div>
+
+            </div>
+            <div class="">Step action : {{p.type}}</div>
             <div class="input-group mb-1" v-for="(c,ci) in p.config" :key="ci">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">{{ci}}</span>
@@ -143,9 +146,9 @@
 import VueJsonPretty from "vue-json-pretty";
 import orgdata from "./orgdata";
 const funcs = require("json-mapping-procedures");
+const actiontypes = Object.keys(funcs).filter(on=>on!="config");
 export default {
   data() {
-    window.orgdata = orgdata;
     return {
       window,
       data: {
@@ -156,10 +159,8 @@ export default {
         origin: null,
         target: null
       },
-      originselect: null,
-      targetselect: null,
-      // originselected: {},
-      // targetselected: {},
+      funcs,
+      actiontypes,
       procedures: [],
       openprocededure: null
     };
@@ -171,24 +172,20 @@ export default {
     
   },
   methods: {
-    addnewprocedure() {
+    addnewprocedure(type) {
+      type = type|| 'fieldAdd';
+      let config ={ ...this.funcs.config[type]};
       let newprocedure = {
-        name: "",
-        type: "grouping",
-        config: {
-          from: "",
-          fromFeild: "",
-          operation: "",
-          conditionPath: "",
-          conditionValue: "",
-          conditionRule: "",
-          targetPath: "",
-          targetObject: "",
-        },
+        name: type,
+        type,
+        config,
         edit:true
       };
       this.procedures.push(newprocedure);
       this.openprocededure = this.procedures.length-1
+    },
+    setstepconfig(p){
+      p.config = this.funcs.config[p.type]
     },
     async addProcedure(type, config, name) {
       let newprocedure = {
@@ -198,7 +195,7 @@ export default {
       };
       this.procedures.push(newprocedure);
       
-      let result = await this[type](this.data, config, newprocedure);
+      let result = await this.funcs[type](this.data, config, newprocedure);
       if (result) {
         newprocedure.class = "danger";
         newprocedure.error = result;
@@ -220,7 +217,7 @@ export default {
           break;
         }
         p.class = "primary";
-        let result = await this[p.type](this.data,p.config, p);
+        let result = await this.funcs[p.type](this.data,p.config, p);
         if (result) {
           p.class = "danger";
           p.error = result;
@@ -233,11 +230,6 @@ export default {
       }
       this.$forceUpdate();
     },
-    copy:funcs.fieldCopy,
-    addfeild: funcs.fieldAdd,
-    removefeild:funcs.fieldRemove,
-    grouping:funcs.groupToSibling,
-    fieldRename:funcs.fieldRename,
     saveprocedures(){
       window.localStorage.setItem('procedures',JSON.stringify(this.procedures))
     },
