@@ -37,10 +37,10 @@
         >save</div>
 
         <div class="procedure-detail" v-if="i == openprocededure" @click.stop>
-          <div class="editinfo">
-            <div class="row mt-2">
-              <div class="input-group input-group-sm mb-4 col-6 pr-0">
-                <div class="input-group-prepend">
+          <div class="editinfo container">
+            <div class="row mt-2" :title="(p.descriptions||{}).overall">
+              <div class="input-group input-group-sm mb-1 col-6 pr-0">
+                <div class="input-group-prepend" >
                   <label
                     class="bg-primary text-light input-group-text"
                     for="inputGroupSelect01"
@@ -56,7 +56,7 @@
                   <option v-for="(t,index) in actiontypes" :key="index" :value="t">{{t}}</option>
                 </select>
               </div>
-              <div class="input-group input-group-sm mb-4 col-6">
+              <div class="input-group input-group-sm mb-1 col-6">
                 <div class="input-group-prepend">
                   <span class="bg-warning text-light input-group-text" id="basic-addon1">Name</span>
                 </div>
@@ -68,11 +68,12 @@
                   v-model="p.name"
                 />
               </div>
+              <h5 class="col-12 font-bold mb-2 pb-2 border-bottom border-dark"></h5>
             </div>
             <div class>Step action : {{p.type}}</div>
-            <div class="input-group mb-1" v-for="(c,ci) in p.config" :key="ci">
+            <div class="input-group mb-1" v-for="(c,ci) in p.config" :key="ci" :title="(p.descriptions||{})[ci]">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">{{ci}}</span>
+                <span  class="input-group-text" id="basic-addon1">{{ci}}</span>
               </div>
               <textarea
                 :disabled="!p.edit"
@@ -91,7 +92,7 @@
     <div class="jsoncontainer">
       <div class="datajson" v-for="(d,k) in data" :key="k">
         <div class="actions">
-          <div class="title clickable" onclick="console.log(event.path[2].querySelector('div.vjs-tree.has-selectable-control > div:nth-child(2) > span').click())">{{k}}</div>
+          <div class="title clickable" onclick="event.path[2].querySelector('div.vjs-tree.has-selectable-control > div:nth-child(2) > span').click()">{{k}}</div>
           <div class="action small" @click="copytoclipboard(selected[k])">copy</div>
           <div
             class="action small"
@@ -142,6 +143,7 @@
           :selectableType="'single'"
           :showSelectController="true"
           v-model="selected[k]"
+          @change="copytoclipboard"
         ></vue-json-pretty>
       </div>
     </div>
@@ -202,18 +204,21 @@ export default {
     },
     addnewprocedure(type) {
       type = type || "fieldAdd";
-      let config = { ...this.funcs.config[type] };
+      let {descriptions,...config} = { ...this.funcs.config[type] };
       let newprocedure = {
         name: type,
         type,
         config,
+        descriptions,
         edit: true
       };
       this.procedures.push(newprocedure);
       this.openprocededure = this.procedures.length - 1;
     },
     setstepconfig(p) {
-      p.config = this.funcs.config[p.type];
+      let {descriptions,...config} = {...this.funcs.config[p.type]};
+      p.config = config;
+      p.descriptions = descriptions;
       p.name = p.type;
     },
     async addProcedure(type, config, name) {
@@ -328,7 +333,7 @@ export default {
     position: relative;
     padding: 15px;
     margin: 5px;
-    min-width: 250px;
+    min-width: 300px;
     max-width: calc(100% - 450px);
     // min-height:100%;
     max-height: calc(100% - 20px);
