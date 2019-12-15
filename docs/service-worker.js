@@ -1,5 +1,5 @@
-importScripts("/zmovies/precache-manifest.e22d6298309fe4f3a7945ece76b8ce7a.js", "/zmovies/workbox-v3.6.3/workbox-sw.js");
-workbox.setConfig({modulePathPrefix: "/zmovies/workbox-v3.6.3"});
+importScripts("/jsonmapper/precache-manifest.773507bb393e57281fbd5c0a09dce0a8.js", "/jsonmapper/workbox-v3.6.3/workbox-sw.js");
+workbox.setConfig({modulePathPrefix: "/jsonmapper/workbox-v3.6.3"});
 self.addEventListener("install", function(event) {
   event.waitUntil(
     caches.open('offlinecaches').then(function(cache) {
