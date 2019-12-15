@@ -8,27 +8,27 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/loaders/movie.gif"
   },
   {
-    "revision": "97ed9e8e6a105c388a4b",
-    "url": "/json-mapping-front/js/chunk-70dc8258.b7c6cd7f.js"
+    "revision": "38194c2f6556cf3c4525",
+    "url": "/json-mapping-front/js/chunk-70dc8258.eb8751d0.js"
   },
   {
     "revision": "e8ff09c5bc760608e7431f14032fd293",
     "url": "/json-mapping-front/logo.png"
   },
   {
-    "revision": "429c7d578162526ca85e",
-    "url": "/json-mapping-front/js/chunk-vendors.86fbe2c0.js"
+    "revision": "c4384d6d4b60851471b0",
+    "url": "/json-mapping-front/js/chunk-vendors.6c2775d0.js"
   },
   {
-    "revision": "101a8cc034ef8270a3f2",
-    "url": "/json-mapping-front/js/pdfjsWorker.783a4eb0.js"
+    "revision": "bf6d05d4affe1f623595",
+    "url": "/json-mapping-front/js/pdfjsWorker.d891ed7b.js"
   },
   {
     "revision": "735ab4f94fbcd57074377afca324c813",
     "url": "/json-mapping-front/robots.txt"
   },
   {
-    "revision": "09e3a1c4b7d7652839d2bbcb19dc14a4",
+    "revision": "a3a9444b4bc403bffc77148baf6063f7",
     "url": "/json-mapping-front/index.html"
   },
   {
@@ -40,32 +40,32 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/ttsicons/refresh.svg"
   },
   {
-    "revision": "8181039b61cfc565659fa059c039e706",
-    "url": "/json-mapping-front/img/ttsicons/plus.svg"
-  },
-  {
     "revision": "7db92e62bee29459989694fb4526bc16",
     "url": "/json-mapping-front/img/ttsicons/play.svg"
   },
   {
-    "revision": "e3eca74d0d77d7299725c27949c59ebd",
-    "url": "/json-mapping-front/img/loaders/rings.svg"
+    "revision": "8181039b61cfc565659fa059c039e706",
+    "url": "/json-mapping-front/img/ttsicons/plus.svg"
   },
   {
     "revision": "d8f8be8601d46e34d280ea4e44a5be1d",
     "url": "/json-mapping-front/img/loaders/puff.svg"
   },
   {
-    "revision": "783c7836eb439161b1f9fa84430c7bf9",
-    "url": "/json-mapping-front/img/ttsicons/list.svg"
-  },
-  {
-    "revision": "c05567d89385af83e41d",
-    "url": "/json-mapping-front/js/app.b00a9718.js"
+    "revision": "e3eca74d0d77d7299725c27949c59ebd",
+    "url": "/json-mapping-front/img/loaders/rings.svg"
   },
   {
     "revision": "f7caff4f185c623ba45c02ab832f9c1f",
     "url": "/json-mapping-front/img/ttsicons/bookmark.svg"
+  },
+  {
+    "revision": "2f0531957bb944b58662",
+    "url": "/json-mapping-front/js/app.a3d76932.js"
+  },
+  {
+    "revision": "783c7836eb439161b1f9fa84430c7bf9",
+    "url": "/json-mapping-front/img/ttsicons/list.svg"
   },
   {
     "revision": "3a1311d5e71f7d0d9cf75005f1992426",
@@ -112,15 +112,15 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/db/movies/list/lastupdated/1.json"
   },
   {
-    "revision": "429c7d578162526ca85e",
+    "revision": "c4384d6d4b60851471b0",
     "url": "/json-mapping-front/css/chunk-vendors.6acb9ff2.css"
   },
   {
-    "revision": "c05567d89385af83e41d",
+    "revision": "2f0531957bb944b58662",
     "url": "/json-mapping-front/css/app.0f2c1e74.css"
   },
   {
-    "revision": "db3c594d8ef23b1c857c0d5b7fe9d652",
-    "url": "/json-mapping-front/47991dbf3770404c5501.worker.js"
+    "revision": "1d5fc7863e43c685d1ebcf517955ed62",
+    "url": "/json-mapping-front/039dfb73b413c37270ab.worker.js"
   }
 ];

@@ -164,9 +164,10 @@
 import VueJsonPretty from "vue-json-pretty";
 import origin from "./orgdata";
 import config from "./config.js";
-const funcs = require("json-mapping-procedures");
+const jmp = require("json-mapping-procedures");
 const _ = require("lodash");
-const actiontypes = Object.keys(funcs).filter(a => a != "config");
+const actiontypes = Object.keys(jmp.funcs);
+console.log(jmp.funcs);
 let defaultdata = {
   origin,
   config,
@@ -189,7 +190,7 @@ export default {
       data: _.cloneDeep(defaultdata),
       selected,
       expanded,
-      funcs,
+      jmp,
       actiontypes,
       showprocs: true,
       procedures: [],
@@ -218,7 +219,7 @@ export default {
     },
     addnewprocedure(type) {
       type = type || "fieldAdd";
-      let { descriptions, ...config } = { ...this.funcs.config[type] };
+      let { descriptions, ...config } = { ...this.jmp.config[type] };
       let newprocedure = {
         name: type,
         type,
@@ -230,7 +231,7 @@ export default {
       this.openprocededure = this.procedures.length - 1;
     },
     setstepconfig(p) {
-      let { descriptions, ...config } = { ...this.funcs.config[p.type] };
+      let { descriptions, ...config } = { ...this.jmp.config[p.type] };
       p.config = config;
       p.descriptions = descriptions;
       p.name = p.type;
@@ -243,7 +244,7 @@ export default {
       };
       this.procedures.push(newprocedure);
 
-      let result = await this.funcs[type](this.data, config, newprocedure);
+      let result = await this.jmp.funcs[type](this.data, config, newprocedure);
       if (result) {
         newprocedure.class = "danger";
         newprocedure.error = result;
@@ -268,7 +269,7 @@ export default {
           break;
         }
         p.class = "primary";
-        let result = await this.funcs[p.type](this.data, p.config, p);
+        let result = await this.jmp.funcs[p.type](this.data, p.config, p);
         if (result) {
           p.class = "danger";
           p.error = result;
