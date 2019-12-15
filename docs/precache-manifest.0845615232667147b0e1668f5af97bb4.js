@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "783c7836eb439161b1f9fa84430c7bf9",
-    "url": "/json-mapping-front/img/ttsicons/list.svg"
+    "revision": "e3eca74d0d77d7299725c27949c59ebd",
+    "url": "/json-mapping-front/img/loaders/rings.svg"
   },
   {
     "revision": "536ef82528266ef7716cc76f13c960e4",
@@ -28,12 +28,8 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/robots.txt"
   },
   {
-    "revision": "53c3a633559a877a8cd5be14d0b1ec01",
+    "revision": "b8e7647d1425e51e16f83e96ef07475b",
     "url": "/json-mapping-front/index.html"
-  },
-  {
-    "revision": "50acadf632bc9506653499fff9bb30ac",
-    "url": "/json-mapping-front/img/ttsicons/settings.svg"
   },
   {
     "revision": "ce554f9aa15080bcf5d30af0549b0779",
@@ -44,6 +40,10 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/ttsicons/plus.svg"
   },
   {
+    "revision": "50acadf632bc9506653499fff9bb30ac",
+    "url": "/json-mapping-front/img/ttsicons/settings.svg"
+  },
+  {
     "revision": "7db92e62bee29459989694fb4526bc16",
     "url": "/json-mapping-front/img/ttsicons/play.svg"
   },
@@ -52,20 +52,16 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/loaders/puff.svg"
   },
   {
-    "revision": "e3eca74d0d77d7299725c27949c59ebd",
-    "url": "/json-mapping-front/img/loaders/rings.svg"
+    "revision": "20ca233e48ad5b5a127f6f1d86a4e4ef",
+    "url": "/json-mapping-front/img/ttsicons/minus.svg"
   },
   {
     "revision": "f7caff4f185c623ba45c02ab832f9c1f",
     "url": "/json-mapping-front/img/ttsicons/bookmark.svg"
   },
   {
-    "revision": "489d7db39a003eaece59",
-    "url": "/json-mapping-front/js/app.cff13ae0.js"
-  },
-  {
-    "revision": "20ca233e48ad5b5a127f6f1d86a4e4ef",
-    "url": "/json-mapping-front/img/ttsicons/minus.svg"
+    "revision": "eeb9368d3c6f4e0ccc39",
+    "url": "/json-mapping-front/js/app.440731fe.js"
   },
   {
     "revision": "3a1311d5e71f7d0d9cf75005f1992426",
@@ -74,6 +70,10 @@ self.__precacheManifest = [
   {
     "revision": "14b4111eac1e3e8aeaaee5e2d9685dc6",
     "url": "/json-mapping-front/img/ttsicons/pause.svg"
+  },
+  {
+    "revision": "783c7836eb439161b1f9fa84430c7bf9",
+    "url": "/json-mapping-front/img/ttsicons/list.svg"
   },
   {
     "revision": "6ee7698493609851c684cc8b560084a7",
@@ -116,7 +116,7 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/css/chunk-vendors.6acb9ff2.css"
   },
   {
-    "revision": "489d7db39a003eaece59",
+    "revision": "eeb9368d3c6f4e0ccc39",
     "url": "/json-mapping-front/css/app.23ff75f1.css"
   },
   {
