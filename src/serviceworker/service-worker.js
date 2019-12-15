@@ -3,7 +3,7 @@ self.addEventListener("install", function(event) {
     caches.open('offlinecaches').then(function(cache) {
       return cache.addAll(
         [
-          '/zmovies/index.html'
+          '/json-mapping-front/index.html'
         ]
       );
     })

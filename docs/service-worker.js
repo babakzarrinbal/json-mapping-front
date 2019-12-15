@@ -1,11 +1,11 @@
-importScripts("/json-mapping-front/precache-manifest.728879e22c1b5efb4e6dd1431d3c959c.js", "/json-mapping-front/workbox-v3.6.3/workbox-sw.js");
+importScripts("/json-mapping-front/precache-manifest.8dd16711b8f6a78aedd60b961524774c.js", "/json-mapping-front/workbox-v3.6.3/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "/json-mapping-front/workbox-v3.6.3"});
 self.addEventListener("install", function(event) {
   event.waitUntil(
     caches.open('offlinecaches').then(function(cache) {
       return cache.addAll(
         [
-          '/zmovies/index.html'
+          '/json-mapping-front/index.html'
         ]
       );
     })
