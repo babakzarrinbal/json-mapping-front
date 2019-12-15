@@ -1,5 +1,5 @@
-importScripts("/jsonmapper/precache-manifest.773507bb393e57281fbd5c0a09dce0a8.js", "/jsonmapper/workbox-v3.6.3/workbox-sw.js");
-workbox.setConfig({modulePathPrefix: "/jsonmapper/workbox-v3.6.3"});
+importScripts("/json-mapping-front/precache-manifest.728879e22c1b5efb4e6dd1431d3c959c.js", "/json-mapping-front/workbox-v3.6.3/workbox-sw.js");
+workbox.setConfig({modulePathPrefix: "/json-mapping-front/workbox-v3.6.3"});
 self.addEventListener("install", function(event) {
   event.waitUntil(
     caches.open('offlinecaches').then(function(cache) {

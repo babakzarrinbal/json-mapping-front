@@ -27,5 +27,5 @@ module.exports = {
     },
   },
   outputDir: "docs",
-  publicPath: "/jsonmapper/"
+  publicPath: "/json-mapping-front/"
 };
