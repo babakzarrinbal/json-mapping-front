@@ -396,7 +396,8 @@ export default {
           }catch(e){
             obj = {"inputdata":obj}
           }
-          _self.data[fn] = obj
+          _self.data[fn] = obj;
+          _self.defaultdata[fn] = obj;
           _self.$forceUpdate();
         };
         reader.readAsText(e.dataTransfer.files[i]);
