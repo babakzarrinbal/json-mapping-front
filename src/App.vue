@@ -1,10 +1,11 @@
 <template>
-  <div id="app" style="widht:100vw;height:100%;">
+  <div id="app" style="widht:100vw;height:100%;" @drop="createNewJson($event)">
     <div class="expand" @click="showprocs= !showprocs">{{showprocs ? " - " : " + "}}</div>
     <div class="procedures list-group" v-if="showprocs">
       <div class="row ml-1 w-100 d-block">
         <div class="btn btn-secondary float-left mx-1" @click="saveprocedures()">Save</div>
         <div class="btn btn-secondary float-left mx-1" @click="loadprocedures()">Load</div>
+        <div class="btn btn-warning float-left mx-1" @click="createNewJson()">Add Item</div>
         <div class="btn btn-primary float-right mx-1" @click="downloadfile()">export to json</div>
       </div>
       <div class="actions">
@@ -145,6 +146,7 @@
             ,'Rename feild @' + selected[k]
             )"
           >I</div>
+        <div class="removebtn clickable" @click="removeJson(k)">X</div>
         </div>
         <vue-json-pretty
           :path="k"
@@ -167,7 +169,6 @@ import config from "./config.js";
 const jmp = require("json-mapping-procedures");
 const _ = require("lodash");
 const actiontypes = Object.keys(jmp.funcs);
-console.log(jmp.funcs);
 let defaultdata = {
   origin,
   config,
@@ -201,7 +202,24 @@ export default {
   components: {
     VueJsonPretty
   },
-  async created() {},
+  async created() {
+    window.addEventListener(
+      "dragover",
+      function(e) {
+        e = e || event;
+        e.preventDefault();
+      },
+      false
+    );
+    window.addEventListener(
+      "drop",
+      function(e) {
+        e = e || event;
+        e.preventDefault();
+      },
+      false
+    );
+  },
   methods: {
     // clickhandler(...args) {
     //   console.log(args);
@@ -333,6 +351,39 @@ export default {
           window.URL.revokeObjectURL(url);
         }, 0);
       }
+    },
+    createNewJson(e) {
+      let _self =  this;
+      if (!e) {
+      let itemkey = window.prompt("json Name?");
+        if (!itemkey) return;
+        this.defaultdata[itemkey] = {};
+        this.data[itemkey] = {};
+        return this.$forceUpdate();
+      }
+      for(let i=0;i<e.dataTransfer.files.length;i++){
+        let fn = e.dataTransfer.files[i].name;
+        fn = fn.slice(0,fn.lastIndexOf("."));
+        let reader = new FileReader();
+        reader.onload = function(event) {
+          // let itemkey = window.prompt("json Name?");
+          let obj = event.target.result;
+          try{
+             obj = JSON.parse(obj);
+          }catch(e){
+            obj = {"inputdata":obj}
+          }
+          _self.data[fn] = obj
+          _self.$forceUpdate();
+        };
+        reader.readAsText(e.dataTransfer.files[i]);
+
+      }
+    },
+    removeJson(key){
+      if(!window.confirm('Are you sure to Delete?')) return;
+      delete this.data[key];
+      return this.$forceUpdate();
     }
   },
   watch: {},
@@ -390,9 +441,8 @@ export default {
       width: calc(100% - 65px);
       margin-top: 5px;
       margin-bottom: 5px;
-      margin-left:45px;
-      margin-right:15px;
-
+      margin-left: 45px;
+      margin-right: 15px;
     }
     .actions {
       display: flex;
@@ -420,6 +470,17 @@ export default {
         cursor: pointer;
         user-select: none;
       }
+    }
+    .removebtn{
+      padding:5px 3px;
+      color:white;
+      background-color: red;
+      border-radius: 50%;
+      justify-self: center;
+      align-self: center;
+      float:right;
+      padding: 0px 6px;
+    margin: 0 4px;
     }
   }
 }
