@@ -104,7 +104,7 @@
             class="title clickable"
             onclick="event.path[2].querySelector('div.vjs-tree.has-selectable-control > div:nth-child(2) > span').click()"
           >{{k}}</div>
-          <div class="action small" @click="copytoclipboard(selected[k])">copy</div>
+          <!-- <div class="action small" @click="copytoclipboard(selected[k])">copy</div> -->
           <div
             class="action small"
             @click="addProcedure('fieldAdd',{
@@ -112,7 +112,7 @@
               name: window.prompt('name of field'),
               data:'{}'
             },'adding feild @' + selected[k])"
-          >+ {}</div>
+          >+</div>
           <!-- <div
             class="action small"
             @click="addProcedure(
@@ -374,7 +374,6 @@ export default {
   overflow: scroll;
   .datajson {
     position: relative;
-    padding: 15px;
     margin: 5px;
     min-width: 300px;
     max-width: calc(100% - 450px);
@@ -388,13 +387,17 @@ export default {
     overflow-x: hidden;
     .vjs-tree.is-root {
       width: calc(100% - 65px);
-      margin-top: 30px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      margin-left:45px;
+      margin-right:15px;
+
     }
     .actions {
       display: flex;
       background-color: rgb(143, 143, 255);
       text-align: center;
-      position: absolute;
+      position: sticky;
       top: 0;
       left: 0;
       right: 0;

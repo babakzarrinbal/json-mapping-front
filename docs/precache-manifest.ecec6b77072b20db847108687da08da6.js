@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "20ca233e48ad5b5a127f6f1d86a4e4ef",
-    "url": "/json-mapping-front/img/ttsicons/minus.svg"
+    "revision": "f7caff4f185c623ba45c02ab832f9c1f",
+    "url": "/json-mapping-front/img/ttsicons/bookmark.svg"
   },
   {
     "revision": "536ef82528266ef7716cc76f13c960e4",
@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/robots.txt"
   },
   {
-    "revision": "a3a9444b4bc403bffc77148baf6063f7",
+    "revision": "869890654881e87e03f9ba6f49fed7f7",
     "url": "/json-mapping-front/index.html"
   },
   {
@@ -40,12 +40,12 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/ttsicons/refresh.svg"
   },
   {
-    "revision": "7db92e62bee29459989694fb4526bc16",
-    "url": "/json-mapping-front/img/ttsicons/play.svg"
-  },
-  {
     "revision": "8181039b61cfc565659fa059c039e706",
     "url": "/json-mapping-front/img/ttsicons/plus.svg"
+  },
+  {
+    "revision": "7db92e62bee29459989694fb4526bc16",
+    "url": "/json-mapping-front/img/ttsicons/play.svg"
   },
   {
     "revision": "d8f8be8601d46e34d280ea4e44a5be1d",
@@ -56,32 +56,36 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/loaders/rings.svg"
   },
   {
-    "revision": "f7caff4f185c623ba45c02ab832f9c1f",
-    "url": "/json-mapping-front/img/ttsicons/bookmark.svg"
-  },
-  {
-    "revision": "2f0531957bb944b58662",
-    "url": "/json-mapping-front/js/app.a3d76932.js"
-  },
-  {
     "revision": "783c7836eb439161b1f9fa84430c7bf9",
     "url": "/json-mapping-front/img/ttsicons/list.svg"
   },
   {
-    "revision": "3a1311d5e71f7d0d9cf75005f1992426",
-    "url": "/json-mapping-front/img/ttsicons/next.svg"
+    "revision": "41d3e0ba7040aea129aa",
+    "url": "/json-mapping-front/js/app.a8f2fc6b.js"
+  },
+  {
+    "revision": "20ca233e48ad5b5a127f6f1d86a4e4ef",
+    "url": "/json-mapping-front/img/ttsicons/minus.svg"
   },
   {
     "revision": "14b4111eac1e3e8aeaaee5e2d9685dc6",
     "url": "/json-mapping-front/img/ttsicons/pause.svg"
   },
   {
+    "revision": "3a1311d5e71f7d0d9cf75005f1992426",
+    "url": "/json-mapping-front/img/ttsicons/next.svg"
+  },
+  {
     "revision": "6ee7698493609851c684cc8b560084a7",
     "url": "/json-mapping-front/img/ttsicons/play-full.svg"
   },
   {
-    "revision": "01711fa464361d1f2c5994e387288432",
-    "url": "/json-mapping-front/img/icon/notsee.png"
+    "revision": "3e7f8afa35e80c2ec94e5d93bbf47b3a",
+    "url": "/json-mapping-front/img/icon/see.png"
+  },
+  {
+    "revision": "da8857c4b5ff5228eda7b8bad5514750",
+    "url": "/json-mapping-front/img/icon/downloadqueue.png"
   },
   {
     "revision": "7e7fd524bff2b430af8a924bae7b6fad",
@@ -92,12 +96,8 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/icon/setting.png"
   },
   {
-    "revision": "3e7f8afa35e80c2ec94e5d93bbf47b3a",
-    "url": "/json-mapping-front/img/icon/see.png"
-  },
-  {
-    "revision": "da8857c4b5ff5228eda7b8bad5514750",
-    "url": "/json-mapping-front/img/icon/downloadqueue.png"
+    "revision": "01711fa464361d1f2c5994e387288432",
+    "url": "/json-mapping-front/img/icon/notsee.png"
   },
   {
     "revision": "8f3082d40ef4c4f2e90c48c4f944d8af",
@@ -116,8 +116,8 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/css/chunk-vendors.6acb9ff2.css"
   },
   {
-    "revision": "2f0531957bb944b58662",
-    "url": "/json-mapping-front/css/app.0f2c1e74.css"
+    "revision": "41d3e0ba7040aea129aa",
+    "url": "/json-mapping-front/css/app.4aea5996.css"
   },
   {
     "revision": "1d5fc7863e43c685d1ebcf517955ed62",
