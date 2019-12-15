@@ -382,6 +382,7 @@ export default {
     },
     removeJson(key){
       if(!window.confirm('Are you sure to Delete?')) return;
+      delete this.defaultdata[key];
       delete this.data[key];
       return this.$forceUpdate();
     }
