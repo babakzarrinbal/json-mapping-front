@@ -6,7 +6,9 @@
         <div class="btn btn-secondary float-left mx-1" @click="saveprocedures()">Save</div>
         <div class="btn btn-secondary float-left mx-1" @click="loadprocedures()">Load</div>
         <div class="btn btn-warning float-left mx-1" @click="createNewJson()">Add Item</div>
-        <div class="btn btn-primary float-right mx-1" @click="downloadfile()">export to json</div>
+        <div class="btn btn-primary float-right mx-1" @click="downloadfile()">export</div>
+        <div class="btn btn-info float-right mx-1" @click="$refs.procin.click()">import</div>
+        <input type="file" @change="importedproc($event)" style="display:none;" ref="procin">
       </div>
       <div class="actions">
         <div class="btn btn-success" @click="addnewprocedure()">Add Step</div>
@@ -323,6 +325,27 @@ export default {
         this.procedures.splice(old_index, 1)[0]
       );
       return this.procedures; // for testing
+    },
+    importedproc(e){
+      
+      let _self =  this;
+      if(!e.target.files.length) return;
+      let reader = new FileReader();
+        reader.onload = function(event) {
+          // let itemkey = window.prompt("json Name?");
+          let obj = event.target.result;
+          e.target.value = null;
+          try{
+             obj = JSON.parse(obj);
+          }catch(e){
+            return window.alert('unacceptable proccessfile')
+          }
+          if(!Array.isArray(obj)) return window.alert('unacceptable proccessfile')
+          _self.procedures = obj
+          _self.$forceUpdate();
+        };
+        reader.readAsText(e.target.files[0]);
+        
     },
     downloadfile(data, filename = "procedures.json", type = "text/plain") {
       data =
