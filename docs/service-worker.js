@@ -1,4 +1,4 @@
-importScripts("/json-mapping-front/precache-manifest.8dd16711b8f6a78aedd60b961524774c.js", "/json-mapping-front/workbox-v3.6.3/workbox-sw.js");
+importScripts("/json-mapping-front/precache-manifest.fcc4eb2266adfa8e765bf7c0fb337c9f.js", "/json-mapping-front/workbox-v3.6.3/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "/json-mapping-front/workbox-v3.6.3"});
 self.addEventListener("install", function(event) {
   event.waitUntil(

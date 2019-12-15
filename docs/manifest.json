@@ -1,6 +1,6 @@
 {
-  "name": "ZMovies",
-  "short_name": "ZMovies",
+  "name": "json-mapping-front",
+  "short_name": "jMapper",
   "icons": [
     {
       "src": "img/icons/android-chrome-192x192.png",
@@ -38,8 +38,8 @@
       "type": "image/png"
     }
   ],
-  "scope": "/zmovies/",
-  "start_url": "/zmovies/",
+  "scope": "/json-mapping-front/",
+  "start_url": "/json-mapping-front/",
   "display": "standalone",
   "background_color": "#287cde",
   "theme_color": "#287cde",
