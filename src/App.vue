@@ -2,14 +2,17 @@
   <div id="app" style="widht:100vw;height:100%;">
     <div class="expand" @click="showprocs= !showprocs">{{showprocs ? " - " : " + "}}</div>
     <div class="procedures list-group" v-if="showprocs">
+      <div class="row ml-1 w-100 d-block">
+        <div class="btn btn-secondary float-left mx-1" @click="saveprocedures()">Save</div>
+        <div class="btn btn-secondary float-left mx-1" @click="loadprocedures()">Load</div>
+        <div class="btn btn-primary float-right mx-1" @click="downloadfile()">export to json</div>
+      </div>
       <div class="actions">
         <div class="btn btn-success" @click="addnewprocedure()">Add Step</div>
         <div
           class="btn btn-info float-right"
           @click="runProcedures()"
         >Process All {{proctime ? proctime+" ms" : ""}}</div>
-        <div class="btn btn-secondary float-right mx-2" @click="saveprocedures()">Save</div>
-        <div class="btn btn-secondary float-right" @click="loadprocedures()">Load</div>
       </div>
       <div
         class="p-1 list-group-item procedure"
@@ -40,7 +43,7 @@
           <div class="editinfo container">
             <div class="row mt-2" :title="(p.descriptions||{}).overall">
               <div class="input-group input-group-sm mb-1 col-6 pr-0">
-                <div class="input-group-prepend" >
+                <div class="input-group-prepend">
                   <label
                     class="bg-primary text-light input-group-text"
                     for="inputGroupSelect01"
@@ -71,15 +74,20 @@
               <h5 class="col-12 font-bold mb-2 pb-2 border-bottom border-dark"></h5>
             </div>
             <div class>Step action : {{p.type}}</div>
-            <div class="input-group mb-1" v-for="(c,ci) in p.config" :key="ci" :title="(p.descriptions||{})[ci]">
+            <div
+              class="input-group mb-1"
+              v-for="(c,ci) in p.config"
+              :key="ci"
+              :title="(p.descriptions||{})[ci]"
+            >
               <div class="input-group-prepend">
-                <span  class="input-group-text" id="basic-addon1">{{ci}}</span>
+                <span class="input-group-text" id="basic-addon1">{{ci}}</span>
               </div>
               <textarea
                 :disabled="!p.edit"
                 type="text"
                 class="configtextarea form-control"
-                :placeholder="ci"
+                :placeholder="(p.descriptions||{})[ci] || ci"
                 v-model="p.config[ci]"
               />
             </div>
@@ -92,7 +100,10 @@
     <div class="jsoncontainer">
       <div class="datajson" v-for="(d,k) in data" :key="k">
         <div class="actions">
-          <div class="title clickable" onclick="event.path[2].querySelector('div.vjs-tree.has-selectable-control > div:nth-child(2) > span').click()">{{k}}</div>
+          <div
+            class="title clickable"
+            onclick="event.path[2].querySelector('div.vjs-tree.has-selectable-control > div:nth-child(2) > span').click()"
+          >{{k}}</div>
           <div class="action small" @click="copytoclipboard(selected[k])">copy</div>
           <div
             class="action small"
@@ -166,7 +177,10 @@ let selected = Object.keys(defaultdata).reduce(
   (cu, c) => ({ ...cu, [c]: null }),
   {}
 );
-let expanded = Object.keys(defaultdata).reduce((cu, c) => ({ ...cu, [c]: true }), {});
+let expanded = Object.keys(defaultdata).reduce(
+  (cu, c) => ({ ...cu, [c]: true }),
+  {}
+);
 export default {
   data() {
     return {
@@ -204,7 +218,7 @@ export default {
     },
     addnewprocedure(type) {
       type = type || "fieldAdd";
-      let {descriptions,...config} = { ...this.funcs.config[type] };
+      let { descriptions, ...config } = { ...this.funcs.config[type] };
       let newprocedure = {
         name: type,
         type,
@@ -216,7 +230,7 @@ export default {
       this.openprocededure = this.procedures.length - 1;
     },
     setstepconfig(p) {
-      let {descriptions,...config} = {...this.funcs.config[p.type]};
+      let { descriptions, ...config } = { ...this.funcs.config[p.type] };
       p.config = config;
       p.descriptions = descriptions;
       p.name = p.type;
@@ -290,6 +304,34 @@ export default {
         this.procedures.splice(old_index, 1)[0]
       );
       return this.procedures; // for testing
+    },
+    downloadfile(data, filename = "procedures.json", type = "text/plain") {
+      data =
+        data ||
+        this.procedures.map(p => ({
+          name: p.name,
+          config: p.config,
+          type: p.type
+        }));
+
+      if (typeof data == "object") data = JSON.stringify(data);
+      let file = new Blob([data], { type: type, name: filename });
+      if (window.navigator.msSaveOrOpenBlob)
+        // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+      else {
+        // Others
+        let a = window.document.createElement("a"),
+          url = window.URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        window.document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+          window.document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+        }, 0);
+      }
     }
   },
   watch: {},
@@ -325,7 +367,7 @@ export default {
 .jsoncontainer {
   display: flex;
   flex-grow: 1;
-  height: 100%;
+  max-height: 100%;
 
   flex-wrap: wrap;
   overflow: scroll;
@@ -345,16 +387,16 @@ export default {
     overflow-x: hidden;
     .vjs-tree.is-root {
       width: calc(100% - 65px);
-      margin-top:30px;
+      margin-top: 30px;
     }
     .actions {
       display: flex;
       background-color: rgb(143, 143, 255);
       text-align: center;
       position: absolute;
-      top:0;
-      left:0;
-      right:0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 999;
       justify-content: center;
       align-items: center;
@@ -390,8 +432,9 @@ export default {
       border-top: 1px solid #c3c1c1;
       margin-top: 10px;
       .configtextarea {
-        height: 40px;
         min-height: 40px;
+        overflow-y: auto;
+        word-wrap: break-word;
         // max-width:100%;
         // min-width:100%;
       }
