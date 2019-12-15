@@ -352,6 +352,7 @@ export default {
   padding: 10px;
 }
 .expand {
+  z-index: 99999;
   position: absolute;
   top: 5px;
   left: 5px;
