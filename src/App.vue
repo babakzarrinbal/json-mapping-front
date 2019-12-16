@@ -148,6 +148,11 @@
             ,'Rename feild @' + selected[k]
             )"
           >I</div>
+          <div
+            class="action small"
+            @click="downloadfile(d,k+'.json')"
+            style="transform: rotateZ(90deg);padding: 2px 5px;color: #00f900;border: 1px solid #00f900;"
+          >	&#x27a4;</div>
         <div class="removebtn clickable" @click="removeJson(k)">X</div>
         </div>
         <vue-json-pretty
