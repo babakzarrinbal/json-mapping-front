@@ -8,7 +8,7 @@
         <div class="btn btn-warning float-left mx-1" @click="createNewJson()">Add Item</div>
         <div class="btn btn-primary float-right mx-1" @click="downloadfile()">export</div>
         <div class="btn btn-info float-right mx-1" @click="$refs.procin.click()">import</div>
-        <input type="file" @change="importedproc($event)" style="display:none;" ref="procin">
+        <input type="file" @change="importedproc($event)" style="display:none;" ref="procin" />
       </div>
       <div class="actions">
         <div class="btn btn-success" @click="addnewprocedure()">Add Step</div>
@@ -21,25 +21,25 @@
         class="p-1 list-group-item procedure"
         v-for="(p,i) in procedures"
         :key="i"
-        :class="'list-group-item-'+p.class"
+        :class="'list-group-item-'+(p||{}).class"
         @click="openprocededure = openprocededure == i ? null: i"
       >
         <span class="mr-2 clickable" @click.stop="moveSteps(i,i+1)">&#8681;</span>
         <span class="mr-2 clickable" @click.stop="moveSteps(i,i-1)">&#8679;</span>
-        {{i}}: {{p.name}}
+        {{i}}: {{(p||{}).name}}
         <div
           class="btn btn-danger py-0 float-right ml-1"
           @click.stop="procedures = procedures.filter((p,index)=>i!=index);runProcedures();$forceUpdate();"
         >delete</div>
         <div
           class="btn btn-primary py-0 float-right"
-          @click.stop="openprocededure = i;p.edit=true;$forceUpdate();"
-          v-if="!p.edit"
+          @click.stop="openprocededure = i;(p||{}).edit=true;$forceUpdate();"
+          v-if="!(p||{}).edit"
         >edit</div>
         <div
           class="btn btn-success py-0 float-right"
-          @click.stop="openprocededure = null;p.edit=false;"
-          v-if="p.edit"
+          @click.stop="openprocededure = null;(p||{}).edit=false;"
+          v-if="(p||{}).edit"
         >save</div>
 
         <div class="procedure-detail" v-if="i == openprocededure" @click.stop>
@@ -53,13 +53,18 @@
                   >Action Type</label>
                 </div>
                 <select
-                  :disabled="!p.edit"
+                  :disabled="!(p||{}).edit"
                   class="custom-select"
                   id="inputGroupSelect01"
                   v-model="p.type"
                   @change="setstepconfig(p)"
                 >
-                  <option v-for="(t,index) in actiontypes" :key="index" :value="t" :disabled="t.slice(0,2)=='--'">{{t}}</option>
+                  <option
+                    v-for="(t,index) in actiontypes"
+                    :key="index"
+                    :value="t"
+                    :disabled="t.slice(0,2)=='--'"
+                  >{{t}}</option>
                 </select>
               </div>
               <div class="input-group input-group-sm mb-1 col-6">
@@ -67,7 +72,7 @@
                   <span class="bg-warning text-light input-group-text" id="basic-addon1">Name</span>
                 </div>
                 <input
-                  :disabled="!p.edit"
+                  :disabled="!(p||{}).edit"
                   type="text"
                   class="form-control"
                   placeholder="Name"
@@ -87,7 +92,7 @@
                 <span class="input-group-text" id="basic-addon1">{{ci}}</span>
               </div>
               <textarea
-                :disabled="!p.edit"
+                :disabled="!(p||{}).edit"
                 type="text"
                 class="configtextarea form-control"
                 :placeholder="(p.descriptions||{})[ci] || ci"
@@ -152,8 +157,8 @@
             class="action small"
             @click="downloadfile(d,k+'.json')"
             style="transform: rotateZ(90deg);padding: 2px 5px;color: #00f900;border: 1px solid #00f900;"
-          >	&#x27a4;</div>
-        <div class="removebtn clickable" @click="removeJson(k)">X</div>
+          >&#x27a4;</div>
+          <div class="removebtn clickable" @click="removeJson(k)">X</div>
         </div>
         <vue-json-pretty
           :path="k"
@@ -318,12 +323,8 @@ export default {
       this.procedures = JSON.parse(window.localStorage.getItem("procedures"));
     },
     moveSteps(old_index, new_index) {
-      if (new_index >= this.procedures.length) {
-        var k = new_index - this.procedures.length + 1;
-        while (k--) {
-          this.procedures.push(undefined);
-        }
-      }
+      if (new_index >= this.procedures.length) new_index = 0;
+      if (new_index == -1) new_index = this.procedures.length - 1;
       this.procedures.splice(
         new_index,
         0,
@@ -331,26 +332,25 @@ export default {
       );
       return this.procedures; // for testing
     },
-    importedproc(e){
-      
-      let _self =  this;
-      if(!e.target.files.length) return;
+    importedproc(e) {
+      let _self = this;
+      if (!e.target.files.length) return;
       let reader = new FileReader();
-        reader.onload = function(event) {
-          // let itemkey = window.prompt("json Name?");
-          let obj = event.target.result;
-          e.target.value = null;
-          try{
-             obj = JSON.parse(obj);
-          }catch(e){
-            return window.alert('unacceptable proccessfile')
-          }
-          if(!Array.isArray(obj)) return window.alert('unacceptable proccessfile')
-          _self.procedures = obj
-          _self.$forceUpdate();
-        };
-        reader.readAsText(e.target.files[0]);
-        
+      reader.onload = function(event) {
+        // let itemkey = window.prompt("json Name?");
+        let obj = event.target.result;
+        e.target.value = null;
+        try {
+          obj = JSON.parse(obj);
+        } catch (e) {
+          return window.alert("unacceptable proccessfile");
+        }
+        if (!Array.isArray(obj))
+          return window.alert("unacceptable proccessfile");
+        _self.procedures = obj;
+        _self.$forceUpdate();
+      };
+      reader.readAsText(e.target.files[0]);
     },
     downloadfile(data, filename = "procedures.json", type = "text/plain") {
       data =
@@ -381,45 +381,44 @@ export default {
       }
     },
     createNewJson(e) {
-      let _self =  this;
+      let _self = this;
       if (!e) {
-      let itemkey = window.prompt("json Name?");
+        let itemkey = window.prompt("json Name?");
         if (!itemkey) return;
         this.addProcedure(
-              'fieldAdd',
-              {
-              parent:"" ,
-              name: itemkey,
-              data:'{}'
-            }
-            ,'Add new Root Item'
-            )
+          "fieldAdd",
+          {
+            parent: "",
+            name: itemkey,
+            data: "{}"
+          },
+          "Add new Root Item"
+        );
         this.defaultdata[itemkey] = {};
         this.data[itemkey] = {};
         return this.$forceUpdate();
       }
-      for(let i=0;i<e.dataTransfer.files.length;i++){
+      for (let i = 0; i < e.dataTransfer.files.length; i++) {
         let fn = e.dataTransfer.files[i].name;
-        fn = fn.slice(0,fn.lastIndexOf("."));
+        fn = fn.slice(0, fn.lastIndexOf("."));
         let reader = new FileReader();
         reader.onload = function(event) {
           // let itemkey = window.prompt("json Name?");
           let obj = event.target.result;
-          try{
-             obj = JSON.parse(obj);
-          }catch(e){
-            obj = {"inputdata":obj}
+          try {
+            obj = JSON.parse(obj);
+          } catch (e) {
+            obj = { inputdata: obj };
           }
           _self.data[fn] = obj;
           _self.defaultdata[fn] = obj;
           _self.$forceUpdate();
         };
         reader.readAsText(e.dataTransfer.files[i]);
-
       }
     },
-    removeJson(key){
-      if(!window.confirm('Are you sure to Delete?')) return;
+    removeJson(key) {
+      if (!window.confirm("Are you sure to Delete?")) return;
       delete this.defaultdata[key];
       delete this.data[key];
       return this.$forceUpdate();
@@ -510,16 +509,16 @@ export default {
         user-select: none;
       }
     }
-    .removebtn{
-      padding:5px 3px;
-      color:white;
+    .removebtn {
+      padding: 5px 3px;
+      color: white;
       background-color: red;
       border-radius: 50%;
       justify-self: center;
       align-self: center;
-      float:right;
+      float: right;
       padding: 0px 6px;
-    margin: 0 4px;
+      margin: 0 4px;
     }
   }
 }
