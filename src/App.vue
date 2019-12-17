@@ -59,7 +59,7 @@
                   v-model="p.type"
                   @change="setstepconfig(p)"
                 >
-                  <option v-for="(t,index) in actiontypes" :key="index" :value="t">{{t}}</option>
+                  <option v-for="(t,index) in actiontypes" :key="index" :value="t" :disabled="t.slice(0,2)=='--'">{{t}}</option>
                 </select>
               </div>
               <div class="input-group input-group-sm mb-1 col-6">
@@ -143,7 +143,7 @@
               'fieldRename',
               {
               path: selected[k],
-              name:window.prompt('new Name')
+              name:window.prompt('new Name',selected[k].slice(selected[k].lastIndexOf('.')+1))
               }
             ,'Rename feild @' + selected[k]
             )"
@@ -171,16 +171,16 @@
 </template>
 <script>
 import VueJsonPretty from "vue-json-pretty";
-import origin from "./orgdata";
-import config from "./config.js";
+// import origin from "./orgdata";
+// import config from "./config.js";
 const jmp = require("json-mapping-procedures");
 const _ = require("lodash");
-const actiontypes = Object.keys(jmp.funcs);
+const actiontypes = Object.keys(jmp.config);
 let defaultdata = {
-  origin,
-  config,
-  translations: {},
-  target: {}
+  // origin,
+  // config,
+  // translations: {},
+  // target: {}
 };
 let selected = Object.keys(defaultdata).reduce(
   (cu, c) => ({ ...cu, [c]: null }),
@@ -385,6 +385,15 @@ export default {
       if (!e) {
       let itemkey = window.prompt("json Name?");
         if (!itemkey) return;
+        this.addProcedure(
+              'fieldAdd',
+              {
+              parent:"" ,
+              name: itemkey,
+              data:'{}'
+            }
+            ,'Add new Root Item'
+            )
         this.defaultdata[itemkey] = {};
         this.data[itemkey] = {};
         return this.$forceUpdate();
