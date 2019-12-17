@@ -29,7 +29,7 @@
         {{i}}: {{(p||{}).name}}
         <div
           class="btn btn-danger py-0 float-right ml-1"
-          @click.stop="procedures = procedures.filter((p,index)=>i!=index);runProcedures();$forceUpdate();"
+          @click.stop="procedures = procedures.filter((p,index)=>i!=index);$forceUpdate();"
         >delete</div>
         <div
           class="btn btn-primary py-0 float-right"
@@ -525,7 +525,9 @@ export default {
 .procedures {
   border: 1px solid gray;
   height: 100%;
+  width: 450px;
   min-width: 450px;
+  max-width: 450px;
   padding: 10px;
   text-align: left;
   overflow: scroll;
