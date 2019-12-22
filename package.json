@@ -14,7 +14,7 @@
     "draggable": "^4.2.0",
     "fastclick": "^1.0.6",
     "jquery": "^3.4.1",
-    "json-mapping-procedures": "^1.0.30",
+    "json-mapping-procedures": "^1.0.31",
     "lodash": "^4.17.15",
     "lodash-bzextras": "^1.0.2",
     "luxon": "^1.16.0",
