@@ -410,8 +410,12 @@ export default {
           } catch (e) {
             obj = { inputdata: obj };
           }
-          _self.data[fn] = obj;
-          _self.defaultdata[fn] = obj;
+          if(Array.isArray(obj) && obj.every(p=>p.config && p.type)){
+            _self.procedures = obj
+          }else{
+            _self.data[fn] = obj;
+            _self.defaultdata[fn] = obj;
+          }
           _self.$forceUpdate();
         };
         reader.readAsText(e.dataTransfer.files[i]);
