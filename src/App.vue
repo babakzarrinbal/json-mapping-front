@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="widht:100vw;height:100%;" @drop="createNewJson($event)">
+  <div id="app" style="widht:100vw;height:100%;" @drop="createNewJson($event.dataTransfer.files)">
     <div class="expand" @click="showprocs= !showprocs">{{showprocs ? " - " : " + "}}</div>
     <div class="procedures list-group" v-if="showprocs">
       <div class="row ml-1 w-100 d-block">
@@ -233,10 +233,6 @@ export default {
     );
   },
   methods: {
-    // clickhandler(...args) {
-    //   console.log(args);
-    //   // console.log("seleccted:",this.selected)
-    // },
     copytoclipboard(text) {
       if (!text) text = "";
       text = text.replace(/\[[0-9]+\]/g, "[]");
@@ -380,9 +376,9 @@ export default {
         }, 0);
       }
     },
-    createNewJson(e) {
+    createNewJson(files) {
       let _self = this;
-      if (!e) {
+      if (!files) {
         let itemkey = window.prompt("json Name?");
         if (!itemkey) return;
         this.addProcedure(
@@ -398,8 +394,8 @@ export default {
         this.data[itemkey] = {};
         return this.$forceUpdate();
       }
-      for (let i = 0; i < e.dataTransfer.files.length; i++) {
-        let fn = e.dataTransfer.files[i].name;
+      for (let i = 0; i < files.length; i++) {
+        let fn = files[i].name;
         fn = fn.slice(0, fn.lastIndexOf("."));
         let reader = new FileReader();
         reader.onload = function(event) {
@@ -418,7 +414,7 @@ export default {
           }
           _self.$forceUpdate();
         };
-        reader.readAsText(e.dataTransfer.files[i]);
+        reader.readAsText(files[i]);
       }
     },
     removeJson(key) {
