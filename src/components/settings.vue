@@ -1,66 +1,24 @@
 <template>
   <div id="settings" @click="hideme()">
     <div class="window" v-on:click.stop>
-      <div class="btn btn-danger" style="width: calc(100% - 10px);" @click="logout()">logout</div>
-      <!-- <div>
-        <input
-          type="checkbox"
-          id="id-name--1"
-          name="set-name"
-          class="switch-input"
-          v-model="notificationStatus"
-          @click="changeNotificationStatus()"
-        >
-        <label for="id-name--1" class="switch-label">
-          Notifications
-          <span class="toggle--on">On</span>
-          <span class="toggle--off">Off</span>
-        </label>
-      </div>-->
+      <button type="button" class="close text-large" aria-label="Close" @click="hideme()">
+        <span aria-hidden="true">&times;</span>
+      </button>
       <div
-        class="btn btn-warning mt-2"
+        class="btn btn-warning mt-1"
         style="width: calc(100% - 10px);"
         @click="updateapp()"
       >Update/reset</div>
       <div
-        class="btn btn-info mt-2"
-        @click="showpassform = !showpassform"
+        class="btn btn-primary mt-1"
         style="width: calc(100% - 10px);"
-      >change password</div>
-      <div v-if="showpassform" class="my-2 mx-auto" style="width: calc(100% - 10px);">
-        <div class="form-group" style="position:relative">
-          <input
-            :type="showoldpass?'text':'password'"
-            v-model="oldpass"
-            class="form-control"
-            placeholder="Old Password"
-          >
-          <img
-            class="seeimg"
-            :src="'/img/icon/'+(showoldpass?'not':'')+'see.png'"
-            style="position:absolute;right:2px;top:4px;"
-            @click="showoldpass= !showoldpass"
-          >
-        </div>
-        <div class="form-group" style="position:relative">
-          <input
-            :type="shownewpass?'text':'password'"
-            v-model="newpass"
-            class="form-control"
-            placeholder="New Password"
-          >
-          <img
-            class="seeimg"
-            :src="'/img/icon/'+(shownewpass?'not':'')+'see.png'"
-            style="position:absolute;right:2px;top:4px;"
-            @click="shownewpass= !shownewpass"
-          >
-        </div>
-        <div class="btn btn-success mt-2" @click="savepassword()" style="width: calc(100% - 30px);">
-          save
-          <img v-if="savingpassword" style="margin:-15px 0;" src="img/rings.svg" class="loader">
-        </div>
-      </div>
+        @click="$emit('Import')"
+      >Import</div>
+      <div
+        class="btn btn-success mt-1"
+        style="width: calc(100% - 10px);"
+        @click="$emit('Export')"
+      >Export</div>
     </div>
   </div>
 </template>
@@ -126,13 +84,14 @@ export default {
   width: 100vw;
   height: 100%;
   position: fixed;
+  background-color: #8080805e;
   top: 0;
-  left: 0;
-  z-index: 299;
+  right: 0;
+  z-index: 99;
   .window {
-    float: right;
+    float: left;
     height: 100%;
-    padding-top: 20px;
+    padding-top: 5px;
     overflow: auto;
     width: 220px;
     background-color: #fff;

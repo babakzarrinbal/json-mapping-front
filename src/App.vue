@@ -1,127 +1,131 @@
 <template>
   <div id="app" style="widht:100vw;height:100%;" @drop="createNewJson($event.dataTransfer.files)">
-    <div class="expand" @click="showprocs= !showprocs">{{showprocs ? " - " : " + "}}</div>
-    <div class="procedures list-group" v-if="showprocs">
-      <div class="row ml-1 w-100 d-block">
-        <div class="btn btn-secondary float-left mx-1" @click="saveprocedures()">Save</div>
-        <div class="btn btn-secondary float-left mx-1" @click="loadprocedures()">Load</div>
-        <div class="btn btn-warning float-left mx-1" @click="createNewJson()">Add Item</div>
-        <div class="btn btn-primary float-right mx-1" @click="downloadfile()">export</div>
-        <div class="btn btn-info float-right mx-1" @click="$refs.procin.click()">import</div>
-        <input type="file" @change="importedproc($event)" style="display:none;" ref="procin" />
-      </div>
-      <div class="actions">
-        <div class="btn btn-success" @click="addnewprocedure()">Add Step</div>
+    <Header id="header" @openMenu="expandSettings = true"/>
+    <Settings v-if="expandSettings" @hide="expandSettings = false" @Export="downloadfile()" @Import="$refs.procin.click()"/>
+    <div class="body" style="position:relative">
+      <div class="expand" @click="showprocs= !showprocs">{{showprocs ? " - " : " + "}}</div>
+      <div class="procedures list-group" v-if="showprocs">
+        <div class="row ml-1 w-100 d-block">
+          <!-- <div class="btn btn-secondary float-left mx-1" @click="saveprocedures()">Save</div>
+          <div class="btn btn-secondary float-left mx-1" @click="loadprocedures()">Load</div> -->
+          <!-- <div class="btn btn-primary float-right mx-1" @click="">export</div>
+          <div class="btn btn-info float-right mx-1" @click="">import</div> -->
+          <input type="file" @change="createNewJson($event.target.files)" multiple style="display:none;" ref="procin" />
+        </div>
+        <div class="actions">
+          <div class="btn btn-success" @click="addnewprocedure()">Add Step</div>
+          <div class="btn btn-warning  mx-1" @click="createNewJson()">Add Item</div>
+          <div class="btn btn-danger  " @click="reset()">Reset</div>
+          <div
+            class="btn btn-info float-right"
+            @click="runProcedures()"
+          >Process:{{proctime ? proctime+" ms" : ""}}</div>
+        </div>
         <div
-          class="btn btn-info float-right"
-          @click="runProcedures()"
-        >Process All {{proctime ? proctime+" ms" : ""}}</div>
-      </div>
-      <div
-        class="p-1 list-group-item procedure"
-        v-for="(p,i) in procedures"
-        :key="i"
-        :class="'list-group-item-'+(p||{}).class"
-        @click="openprocededure = openprocededure == i ? null: i"
-      >
-        <span class="mr-2 clickable" @click.stop="moveSteps(i,i+1)">&#8681;</span>
-        <span class="mr-2 clickable" @click.stop="moveSteps(i,i-1)">&#8679;</span>
-        {{i}}: {{(p||{}).name}}
-        <div
-          class="btn btn-danger py-0 float-right ml-1"
-          @click.stop="procedures = procedures.filter((p,index)=>i!=index);$forceUpdate();"
-        >delete</div>
-        <div
-          class="btn btn-primary py-0 float-right"
-          @click.stop="openprocededure = i;(p||{}).edit=true;$forceUpdate();"
-          v-if="!(p||{}).edit"
-        >edit</div>
-        <div
-          class="btn btn-success py-0 float-right"
-          @click.stop="openprocededure = null;(p||{}).edit=false;"
-          v-if="(p||{}).edit"
-        >save</div>
+          class="p-1 list-group-item procedure"
+          v-for="(p,i) in procedures"
+          :key="i"
+          :class="'list-group-item-'+(p||{}).class"
+          @click="openprocededure = openprocededure == i ? null: i"
+        >
+          <span class="mr-2 clickable" @click.stop="moveSteps(i,i+1)">&#8681;</span>
+          <span class="mr-2 clickable" @click.stop="moveSteps(i,i-1)">&#8679;</span>
+          {{i}}: {{(p||{}).name}}
+          <div
+            class="btn btn-danger py-0 float-right ml-1"
+            @click.stop="procedures = procedures.filter((p,index)=>i!=index);$forceUpdate();"
+          >delete</div>
+          <div
+            class="btn btn-primary py-0 float-right"
+            @click.stop="openprocededure = i;(p||{}).edit=true;$forceUpdate();"
+            v-if="!(p||{}).edit"
+          >edit</div>
+          <div
+            class="btn btn-success py-0 float-right"
+            @click.stop="openprocededure = null;(p||{}).edit=false;"
+            v-if="(p||{}).edit"
+          >save</div>
 
-        <div class="procedure-detail" v-if="i == openprocededure" @click.stop>
-          <div class="editinfo container">
-            <div class="row mt-2" :title="(p.descriptions||{}).overall">
-              <div class="input-group input-group-sm mb-1 col-6 pr-0">
-                <div class="input-group-prepend">
-                  <label
-                    class="bg-primary text-light input-group-text"
-                    for="inputGroupSelect01"
-                  >Action Type</label>
+          <div class="procedure-detail" v-if="i == openprocededure" @click.stop>
+            <div class="editinfo container">
+              <div class="row mt-2" :title="(p.descriptions||{}).overall">
+                <div class="input-group input-group-sm mb-1 col-6 pr-0">
+                  <div class="input-group-prepend">
+                    <label
+                      class="bg-primary text-light input-group-text"
+                      for="inputGroupSelect01"
+                    >Action Type</label>
+                  </div>
+                  <select
+                    :disabled="!(p||{}).edit"
+                    class="custom-select"
+                    id="inputGroupSelect01"
+                    v-model="p.type"
+                    @change="setstepconfig(p)"
+                  >
+                    <option
+                      v-for="(t,index) in actiontypes"
+                      :key="index"
+                      :value="t"
+                      :disabled="t.slice(0,2)=='--'"
+                    >{{t}}</option>
+                  </select>
                 </div>
-                <select
-                  :disabled="!(p||{}).edit"
-                  class="custom-select"
-                  id="inputGroupSelect01"
-                  v-model="p.type"
-                  @change="setstepconfig(p)"
-                >
-                  <option
-                    v-for="(t,index) in actiontypes"
-                    :key="index"
-                    :value="t"
-                    :disabled="t.slice(0,2)=='--'"
-                  >{{t}}</option>
-                </select>
+                <div class="input-group input-group-sm mb-1 col-6">
+                  <div class="input-group-prepend">
+                    <span class="bg-warning text-light input-group-text" id="basic-addon1">Name</span>
+                  </div>
+                  <input
+                    :disabled="!(p||{}).edit"
+                    type="text"
+                    class="form-control"
+                    placeholder="Name"
+                    v-model="p.name"
+                  />
+                </div>
+                <h5 class="col-12 font-bold mb-2 pb-2 border-bottom border-dark"></h5>
               </div>
-              <div class="input-group input-group-sm mb-1 col-6">
+              <div class>Step action : {{p.type}}</div>
+              <div
+                class="input-group mb-1"
+                v-for="(c,ci) in p.config"
+                :key="ci"
+                :title="(p.descriptions||{})[ci]"
+              >
                 <div class="input-group-prepend">
-                  <span class="bg-warning text-light input-group-text" id="basic-addon1">Name</span>
+                  <span class="input-group-text" id="basic-addon1">{{ci}}</span>
                 </div>
-                <input
+                <textarea
                   :disabled="!(p||{}).edit"
                   type="text"
-                  class="form-control"
-                  placeholder="Name"
-                  v-model="p.name"
+                  class="configtextarea form-control"
+                  :placeholder="(p.descriptions||{})[ci] || ci"
+                  v-model="p.config[ci]"
                 />
               </div>
-              <h5 class="col-12 font-bold mb-2 pb-2 border-bottom border-dark"></h5>
+              <br />
+              {{p.error}}
             </div>
-            <div class>Step action : {{p.type}}</div>
-            <div
-              class="input-group mb-1"
-              v-for="(c,ci) in p.config"
-              :key="ci"
-              :title="(p.descriptions||{})[ci]"
-            >
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">{{ci}}</span>
-              </div>
-              <textarea
-                :disabled="!(p||{}).edit"
-                type="text"
-                class="configtextarea form-control"
-                :placeholder="(p.descriptions||{})[ci] || ci"
-                v-model="p.config[ci]"
-              />
-            </div>
-            <br />
-            {{p.error}}
           </div>
         </div>
       </div>
-    </div>
-    <div class="jsoncontainer">
-      <div class="datajson" v-for="(d,k) in data" :key="k">
-        <div class="actions">
-          <div
-            class="title clickable"
-            onclick="event.path[2].querySelector('div.vjs-tree.has-selectable-control > div:nth-child(2) > span').click()"
-          >{{k}}</div>
-          <!-- <div class="action small" @click="copytoclipboard(selected[k])">copy</div> -->
-          <div
-            class="action small"
-            @click="addProcedure('fieldAdd',{
+      <div class="jsoncontainer">
+        <div class="datajson" v-for="(d,k) in data" :key="k">
+          <div class="actions">
+            <div
+              class="title clickable"
+              onclick="event.path[2].querySelector('div.vjs-tree.has-selectable-control > div:nth-child(2) > span').click()"
+            >{{k}}</div>
+            <!-- <div class="action small" @click="copytoclipboard(selected[k])">copy</div> -->
+            <div
+              class="action small"
+              @click="addProcedure('fieldAdd',{
               parent:selected[k] ,
               name: window.prompt('name of field'),
               data:'{}'
             },'adding feild @' + selected[k])"
-          >+</div>
-          <!-- <div
+            >+</div>
+            <!-- <div
             class="action small"
             @click="addProcedure(
               'fieldCopy',
@@ -131,20 +135,20 @@
               }
             ,'copy feild from' + selected.origin+' to '+ selected.target
             )"
-          >></div>-->
-          <div
-            class="action small"
-            @click="addProcedure(
+            >></div>-->
+            <div
+              class="action small"
+              @click="addProcedure(
               'fieldRemove',
               {
               path: selected[k]
               }
             ,'delete feild @' + selected[k]
             )"
-          >-</div>
-          <div
-            class="action small"
-            @click="addProcedure(
+            >-</div>
+            <div
+              class="action small"
+              @click="addProcedure(
               'fieldRename',
               {
               path: selected[k],
@@ -152,57 +156,45 @@
               }
             ,'Rename feild @' + selected[k]
             )"
-          >I</div>
-          <div
-            class="action small"
-            @click="downloadfile(d,k+'.json')"
-            style="transform: rotateZ(90deg);padding: 2px 5px;color: #00f900;border: 1px solid #00f900;"
-          >&#x27a4;</div>
-          <div class="removebtn clickable" @click="removeJson(k)">X</div>
+            >I</div>
+            <div
+              class="action small"
+              @click="downloadfile(d,k+'.json')"
+              style="transform: rotateZ(90deg);padding: 2px 5px;color: #00f900;border: 1px solid #00f900;"
+            >&#x27a4;</div>
+            <div class="removebtn clickable" @click="removeJson(k)">X</div>
+          </div>
+          <vue-json-pretty
+            :path="k"
+            :data="d"
+            :deep="0"
+            :highlightMouseoverNode="true"
+            :selectableType="'single'"
+            :showSelectController="true"
+            v-model="selected[k]"
+            @change="copytoclipboard"
+          ></vue-json-pretty>
         </div>
-        <vue-json-pretty
-          :path="k"
-          :data="d"
-          :deep="0"
-          :highlightMouseoverNode="true"
-          :selectableType="'single'"
-          :showSelectController="true"
-          v-model="selected[k]"
-          @change="copytoclipboard"
-        ></vue-json-pretty>
       </div>
     </div>
   </div>
 </template>
 <script>
 import VueJsonPretty from "vue-json-pretty";
-// import origin from "./orgdata";
-// import config from "./config.js";
+import Header from "./components/header";
+import Settings from "./components/settings";
 const jmp = require("json-mapping-procedures");
 const _ = require("lodash");
 const actiontypes = Object.keys(jmp.config);
-let defaultdata = {
-  // origin,
-  // config,
-  // translations: {},
-  // target: {}
-};
-let selected = Object.keys(defaultdata).reduce(
-  (cu, c) => ({ ...cu, [c]: null }),
-  {}
-);
-let expanded = Object.keys(defaultdata).reduce(
-  (cu, c) => ({ ...cu, [c]: true }),
-  {}
-);
 export default {
   data() {
     return {
       window,
-      defaultdata: defaultdata,
-      data: _.cloneDeep(defaultdata),
-      selected,
-      expanded,
+      expandSettings:false,
+      defaultdata: {},
+      data: {},
+      selected: {},
+      expanded: {},
       jmp,
       actiontypes,
       showprocs: true,
@@ -212,7 +204,9 @@ export default {
     };
   },
   components: {
-    VueJsonPretty
+    VueJsonPretty,
+    Header,
+    Settings
   },
   async created() {
     window.addEventListener(
@@ -279,9 +273,7 @@ export default {
       // this.runProcedures();
     },
     async runProcedures() {
-      this.procedures.forEach(p => (p.class = "secondary"));
-      this.data = _.cloneDeep(this.defaultdata);
-      await this.$nextTick();
+      await this.reset();
       let startin = new Date();
       let i;
       for (i = 0; i < this.procedures.length; i++) {
@@ -327,26 +319,6 @@ export default {
         this.procedures.splice(old_index, 1)[0]
       );
       return this.procedures; // for testing
-    },
-    importedproc(e) {
-      let _self = this;
-      if (!e.target.files.length) return;
-      let reader = new FileReader();
-      reader.onload = function(event) {
-        // let itemkey = window.prompt("json Name?");
-        let obj = event.target.result;
-        e.target.value = null;
-        try {
-          obj = JSON.parse(obj);
-        } catch (e) {
-          return window.alert("unacceptable proccessfile");
-        }
-        if (!Array.isArray(obj))
-          return window.alert("unacceptable proccessfile");
-        _self.procedures = obj;
-        _self.$forceUpdate();
-      };
-      reader.readAsText(e.target.files[0]);
     },
     downloadfile(data, filename = "procedures.json", type = "text/plain") {
       data =
@@ -406,9 +378,9 @@ export default {
           } catch (e) {
             obj = { inputdata: obj };
           }
-          if(Array.isArray(obj) && obj.every(p=>p.config && p.type)){
-            _self.procedures = obj
-          }else{
+          if (Array.isArray(obj) && obj.every(p => p.config && p.type)) {
+            _self.procedures = obj;
+          } else {
             _self.data[fn] = obj;
             _self.defaultdata[fn] = obj;
           }
@@ -416,6 +388,12 @@ export default {
         };
         reader.readAsText(files[i]);
       }
+    },
+    async reset(){
+      this.procedures.forEach(p => (p.class = ""));
+      this.data = _.cloneDeep(this.defaultdata);
+      await this.$nextTick();
+      return;
     },
     removeJson(key) {
       if (!window.confirm("Are you sure to Delete?")) return;
@@ -435,13 +413,20 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  display: flex;
+}
+#header{
+  height:30px;
+}
+.body{
+  position: relative;
   background-color: white;
+  display: flex;
   overflow: hidden;
   padding: 10px;
+  height:calc(100% - 30px);
 }
 .expand {
-  z-index: 99999;
+  z-index: 9;
   position: absolute;
   top: 5px;
   left: 5px;
