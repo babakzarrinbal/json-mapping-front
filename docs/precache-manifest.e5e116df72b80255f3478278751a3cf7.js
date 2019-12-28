@@ -16,8 +16,8 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/logo.png"
   },
   {
-    "revision": "c6b6a231df0b9396717b",
-    "url": "/json-mapping-front/js/chunk-vendors.40da37b1.js"
+    "revision": "cc178cf6ad0486c4ab66",
+    "url": "/json-mapping-front/js/chunk-vendors.cd7ef89c.js"
   },
   {
     "revision": "bf6d05d4affe1f623595",
@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/robots.txt"
   },
   {
-    "revision": "f16ed4994e15106903940c025e950d79",
+    "revision": "36ff2197a0cfe7ab715a17c2b82eb73c",
     "url": "/json-mapping-front/index.html"
   },
   {
@@ -64,8 +64,8 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/ttsicons/bookmark.svg"
   },
   {
-    "revision": "9dc16a270ca6814b6879",
-    "url": "/json-mapping-front/js/app.e13e3594.js"
+    "revision": "4eb783b287f24c0d57f6",
+    "url": "/json-mapping-front/js/app.ed295df8.js"
   },
   {
     "revision": "20ca233e48ad5b5a127f6f1d86a4e4ef",
@@ -84,10 +84,6 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/icon/notsee.png"
   },
   {
-    "revision": "17850a078b8aa98f1b4360f5dac35c37",
-    "url": "/json-mapping-front/img/icon/list-white.png"
-  },
-  {
     "revision": "7e7fd524bff2b430af8a924bae7b6fad",
     "url": "/json-mapping-front/img/icon/list.png"
   },
@@ -98,6 +94,10 @@ self.__precacheManifest = [
   {
     "revision": "3e7f8afa35e80c2ec94e5d93bbf47b3a",
     "url": "/json-mapping-front/img/icon/see.png"
+  },
+  {
+    "revision": "17850a078b8aa98f1b4360f5dac35c37",
+    "url": "/json-mapping-front/img/icon/list-white.png"
   },
   {
     "revision": "da8857c4b5ff5228eda7b8bad5514750",
@@ -116,11 +116,11 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/db/movies/list/lastupdated/1.json"
   },
   {
-    "revision": "c6b6a231df0b9396717b",
+    "revision": "cc178cf6ad0486c4ab66",
     "url": "/json-mapping-front/css/chunk-vendors.6acb9ff2.css"
   },
   {
-    "revision": "9dc16a270ca6814b6879",
+    "revision": "4eb783b287f24c0d57f6",
     "url": "/json-mapping-front/css/app.f9a42cb8.css"
   },
   {

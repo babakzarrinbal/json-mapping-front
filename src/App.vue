@@ -177,6 +177,7 @@
             <div class="removebtn clickable" @click="removeJson(k)">X</div>
           </div>
           <vue-json-pretty
+            @click="editjson($event)"
             :path="k"
             :data="d"
             :deep="0"
@@ -212,7 +213,9 @@ export default {
       showprocs: true,
       procedures: [],
       openprocededure: null,
-      proctime: 0
+      proctime: 0,
+      dblclick: 0,
+      selectedpath: ""
     };
   },
   components: {
@@ -239,8 +242,46 @@ export default {
     );
   },
   methods: {
+    async editjson() {
+      if (Date.now() - this.dblclick > 300) return (this.dblclick = Date.now());
+      if (!this.selectedpath) return;
+      let key = this.selectedpath.slice(this.selectedpath.lastIndexOf(".") + 1);
+      let newkey = window.prompt("Change The key?", key);
+      if (newkey && key != newkey) {
+      let path = !this.selectedpath.includes(".") ? "":this.selectedpath.slice(0,this.selectedpath.lastIndexOf(".") + 1);
+        await this.addProcedure(
+          "fieldRename",
+          {
+            path: this.selectedpath,
+            name: newkey
+          },
+          "Rename feild @" + this.selectedpath
+        );
+        this.selectedpath = path+ newkey;
+      }
+      let data = _.get(this.data,this.selectedpath);
+      let stringdata;
+      try{
+        stringdata = JSON.stringify(data);
+      }catch(e){
+        stringdata = data.toString();
+      }
+
+      let newdata = window.prompt('Change The value?',stringdata);
+      if(newdata && newdata !=stringdata){
+        this.addProcedure(
+          "fieldSetContent",
+          {
+            path: this.selectedpath ,
+            data: newdata.toString()
+          },
+          "Set content @" + this.selectedpath
+        );
+      }
+    },
     copytoclipboard(text) {
       if (!text) text = "";
+      this.selectedpath = text;
       text = text.replace(/\[[0-9]+\]/g, "[]");
       const el = document.createElement("textarea");
       el.value = text;
@@ -313,15 +354,15 @@ export default {
       this.proctime = i == this.procedures.length ? new Date() - startin : 0;
       this.$forceUpdate();
     },
-    saveprocedures() {
-      window.localStorage.setItem(
-        "procedures",
-        JSON.stringify(this.procedures)
-      );
-    },
-    loadprocedures() {
-      this.procedures = JSON.parse(window.localStorage.getItem("procedures"));
-    },
+    // saveprocedures() {
+    //   window.localStorage.setItem(
+    //     "procedures",
+    //     JSON.stringify(this.procedures)
+    //   );
+    // },
+    // loadprocedures() {
+    //   this.procedures = JSON.parse(window.localStorage.getItem("procedures"));
+    // },
     moveSteps(old_index, new_index) {
       if (new_index >= this.procedures.length) new_index = 0;
       if (new_index == -1) new_index = this.procedures.length - 1;
@@ -404,14 +445,14 @@ export default {
           if (Array.isArray(obj) && obj.every(p => p.config && p.type)) {
             _self.procedures = obj;
           } else {
-            _self.data[fn] = obj;
+            _self.data[fn] = _.cloneDeep(obj);
             _self.defaultdata[fn] = obj;
           }
           j++;
           if (j == files.length) _self.$refs.procin.value = null;
           _self.$forceUpdate();
         };
-        this.expandSettings= false;
+        this.expandSettings = false;
         reader.readAsText(files[i]);
       }
     },

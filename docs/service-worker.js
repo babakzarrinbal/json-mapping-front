@@ -1,4 +1,4 @@
-importScripts("/json-mapping-front/precache-manifest.ecba170ce6c4ee3cddc0e39f2ca4a3fe.js", "/json-mapping-front/workbox-v3.6.3/workbox-sw.js");
+importScripts("/json-mapping-front/precache-manifest.e5e116df72b80255f3478278751a3cf7.js", "/json-mapping-front/workbox-v3.6.3/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "/json-mapping-front/workbox-v3.6.3"});
 workbox.setConfig({ modulePathPrefix: "/aknoon/workbox-v4.3.1", debug: false });
 workbox.core.skipWaiting();
