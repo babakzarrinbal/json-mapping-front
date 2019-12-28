@@ -1,7 +1,7 @@
 <template>
   <div  class="container-fluid bg-dark d-flex text-light">
     <div class="clickable" @click="$emit('openMenu')">
-    menu
+    <img src="img/icon/list-white.png" alt="">
     </div>
   </div>
 </template>

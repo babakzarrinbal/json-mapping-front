@@ -1,21 +1,33 @@
 <template>
   <div id="app" style="widht:100vw;height:100%;" @drop="createNewJson($event.dataTransfer.files)">
-    <Header id="header" @openMenu="expandSettings = true"/>
-    <Settings v-if="expandSettings" @hide="expandSettings = false" @Export="downloadfile()" @Import="$refs.procin.click()"/>
+    <Header id="header" @openMenu="expandSettings = true" />
+    <Settings
+      v-if="expandSettings"
+      :data="Object.keys(data)"
+      @hide="expandSettings = false"
+      @Export="exportdata"
+      @Import="$refs.procin.click()"
+    />
     <div class="body" style="position:relative">
       <div class="expand" @click="showprocs= !showprocs">{{showprocs ? " - " : " + "}}</div>
       <div class="procedures list-group" v-if="showprocs">
         <div class="row ml-1 w-100 d-block">
           <!-- <div class="btn btn-secondary float-left mx-1" @click="saveprocedures()">Save</div>
-          <div class="btn btn-secondary float-left mx-1" @click="loadprocedures()">Load</div> -->
+          <div class="btn btn-secondary float-left mx-1" @click="loadprocedures()">Load</div>-->
           <!-- <div class="btn btn-primary float-right mx-1" @click="">export</div>
-          <div class="btn btn-info float-right mx-1" @click="">import</div> -->
-          <input type="file" @change="createNewJson($event.target.files)" multiple style="display:none;" ref="procin" />
+          <div class="btn btn-info float-right mx-1" @click="">import</div>-->
+          <input
+            type="file"
+            @change="createNewJson($event.target.files);"
+            multiple
+            style="display:none;"
+            ref="procin"
+          />
         </div>
         <div class="actions">
           <div class="btn btn-success" @click="addnewprocedure()">Add Step</div>
-          <div class="btn btn-warning  mx-1" @click="createNewJson()">Add Item</div>
-          <div class="btn btn-danger  " @click="reset()">Reset</div>
+          <div class="btn btn-warning mx-1" @click="createNewJson()">Add Item</div>
+          <div class="btn btn-danger" @click="reset()">Reset</div>
           <div
             class="btn btn-info float-right"
             @click="runProcedures()"
@@ -190,7 +202,7 @@ export default {
   data() {
     return {
       window,
-      expandSettings:false,
+      expandSettings: false,
       defaultdata: {},
       data: {},
       selected: {},
@@ -320,6 +332,16 @@ export default {
       );
       return this.procedures; // for testing
     },
+    async exportdata(key) {
+      if (key == "__procedures__") return this.downloadfile();
+      if (key == "__All__") {
+        await this.reset();
+        this.downloadfile();
+        _.each(this.data, (v, k) => this.downloadfile(v, k + ".json"));
+        return;
+      }
+      this.downloadfile(this.data[key], key + ".json");
+    },
     downloadfile(data, filename = "procedures.json", type = "text/plain") {
       data =
         data ||
@@ -366,6 +388,7 @@ export default {
         this.data[itemkey] = {};
         return this.$forceUpdate();
       }
+      let j = 0;
       for (let i = 0; i < files.length; i++) {
         let fn = files[i].name;
         fn = fn.slice(0, fn.lastIndexOf("."));
@@ -384,12 +407,15 @@ export default {
             _self.data[fn] = obj;
             _self.defaultdata[fn] = obj;
           }
+          j++;
+          if (j == files.length) _self.$refs.procin.value = null;
           _self.$forceUpdate();
         };
+        this.expandSettings= false;
         reader.readAsText(files[i]);
       }
     },
-    async reset(){
+    async reset() {
       this.procedures.forEach(p => (p.class = ""));
       this.data = _.cloneDeep(this.defaultdata);
       await this.$nextTick();
@@ -414,16 +440,16 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-#header{
-  height:30px;
+#header {
+  height: 30px;
 }
-.body{
+.body {
   position: relative;
   background-color: white;
   display: flex;
   overflow: hidden;
   padding: 10px;
-  height:calc(100% - 30px);
+  height: calc(100% - 30px);
 }
 .expand {
   z-index: 9;

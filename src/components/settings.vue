@@ -1,40 +1,60 @@
 <template>
   <div id="settings" @click="hideme()">
-    <div class="window" v-on:click.stop>
+    <div class="window position-relative" v-on:click.stop>
       <button type="button" class="close text-large" aria-label="Close" @click="hideme()">
         <span aria-hidden="true">&times;</span>
       </button>
-      <div
-        class="btn btn-warning mt-1"
-        style="width: calc(100% - 10px);"
-        @click="updateapp()"
-      >Update/reset</div>
-      <div
-        class="btn btn-primary mt-1"
-        style="width: calc(100% - 10px);"
-        @click="$emit('Import')"
-      >Import</div>
-      <div
-        class="btn btn-success mt-1"
-        style="width: calc(100% - 10px);"
-        @click="$emit('Export')"
-      >Export</div>
+      <div class="clearfix"></div>
+      <dropDown :menuItems="menuitems" class="maindrop" style="display:block;position: relative !important;left:0" />
     </div>
   </div>
 </template>
 
 <script>
+import dropDown from "./dropmenu";
 export default {
   name: "settings",
+  props:['data'],
   data() {
+    let exp = [
+      {
+      title:'Procedures',
+      customClass:"bg-info",
+      action:()=>this.$emit("Export","__procedures__")
+    }];
+    if(this.data.length)exp = [...exp,...this.data.map(title=>({
+      title,
+      action:()=>this.$emit("Export",title)
+    }))]
     return {
       showpassform: false,
       shownewpass: false,
       showoldpass: false,
       savingpassword: false,
       oldpass: null,
-      newpass: null
+      newpass: null,
+      menuitems: [
+        {
+          title: "Update/Reset",
+          action: this.updateapp,
+          customClass: "bg-warning font-weight-bold"
+        },
+        {
+          title: "Import",
+          action: () => this.$emit("Import"),
+          customClass: "font-weight-bold"
+        },
+        {
+          title: "Export",
+          action: () => this.$emit("Export","__All__"),
+          children:exp,
+          customClass: "font-weight-bold"
+        }
+      ]
     };
+  },
+  components: {
+    dropDown
   },
   created() {},
   methods: {
@@ -87,15 +107,53 @@ export default {
   background-color: #8080805e;
   top: 0;
   right: 0;
-  z-index: 99;
+  z-index: 9999;
   .window {
     float: left;
     height: 100%;
     padding-top: 5px;
-    overflow: auto;
+    overflow: visible;
     width: 220px;
     background-color: #fff;
-    box-shadow: -5px 2px 16px grey;
+    box-shadow: 5px 2px 16px #424242;
+  }
+}
+/deep/ .maindrop{
+  > .list-group{
+    box-shadow: none !important;
+  }
+}
+/deep/ .dropdown-parent {
+  user-select: none;
+  cursor: pointer;
+  min-width: 200px;
+  left: 100%;
+  top: 0;
+  display: none;
+  background: white;
+  .list-group{
+    box-shadow: 5px 5px 5px #424242;
+  }
+  .list-group-item:hover {
+    // background:#e6e4e4;
+    &:after {
+      z-index: 1;
+      content: "";
+      background: inherit;
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      filter: brightness(90%);
+    }
+    > .title {
+      transform: translateY(-2px);
+      text-shadow: 4px 9px 7px #585858;
+    }
+    > .dropdown-parent {
+      display: block;
+    }
   }
 }
 </style>

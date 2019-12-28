@@ -28,40 +28,44 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/robots.txt"
   },
   {
-    "revision": "2e3d94efabb9b5997087ee0ec89f8f89",
+    "revision": "84daf30c6d43af80fe6dc721ee6aa160",
     "url": "/json-mapping-front/index.html"
-  },
-  {
-    "revision": "7db92e62bee29459989694fb4526bc16",
-    "url": "/json-mapping-front/img/ttsicons/play.svg"
-  },
-  {
-    "revision": "50acadf632bc9506653499fff9bb30ac",
-    "url": "/json-mapping-front/img/ttsicons/settings.svg"
   },
   {
     "revision": "ce554f9aa15080bcf5d30af0549b0779",
     "url": "/json-mapping-front/img/ttsicons/refresh.svg"
   },
   {
+    "revision": "50acadf632bc9506653499fff9bb30ac",
+    "url": "/json-mapping-front/img/ttsicons/settings.svg"
+  },
+  {
     "revision": "8181039b61cfc565659fa059c039e706",
     "url": "/json-mapping-front/img/ttsicons/plus.svg"
+  },
+  {
+    "revision": "7db92e62bee29459989694fb4526bc16",
+    "url": "/json-mapping-front/img/ttsicons/play.svg"
+  },
+  {
+    "revision": "6ee7698493609851c684cc8b560084a7",
+    "url": "/json-mapping-front/img/ttsicons/play-full.svg"
   },
   {
     "revision": "e3eca74d0d77d7299725c27949c59ebd",
     "url": "/json-mapping-front/img/loaders/rings.svg"
   },
   {
-    "revision": "f7caff4f185c623ba45c02ab832f9c1f",
-    "url": "/json-mapping-front/img/ttsicons/bookmark.svg"
-  },
-  {
     "revision": "d8f8be8601d46e34d280ea4e44a5be1d",
     "url": "/json-mapping-front/img/loaders/puff.svg"
   },
   {
-    "revision": "55c9ec15e28807df6dfd",
-    "url": "/json-mapping-front/js/app.88c1b86b.js"
+    "revision": "f7caff4f185c623ba45c02ab832f9c1f",
+    "url": "/json-mapping-front/img/ttsicons/bookmark.svg"
+  },
+  {
+    "revision": "48acabd088715b1ea97c",
+    "url": "/json-mapping-front/js/app.478faaef.js"
   },
   {
     "revision": "20ca233e48ad5b5a127f6f1d86a4e4ef",
@@ -76,16 +80,12 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/ttsicons/pause.svg"
   },
   {
-    "revision": "6ee7698493609851c684cc8b560084a7",
-    "url": "/json-mapping-front/img/ttsicons/play-full.svg"
-  },
-  {
     "revision": "01711fa464361d1f2c5994e387288432",
     "url": "/json-mapping-front/img/icon/notsee.png"
   },
   {
-    "revision": "da8857c4b5ff5228eda7b8bad5514750",
-    "url": "/json-mapping-front/img/icon/downloadqueue.png"
+    "revision": "7e7fd524bff2b430af8a924bae7b6fad",
+    "url": "/json-mapping-front/img/icon/list.png"
   },
   {
     "revision": "39153b06929a746eee884dd665ab0dc8",
@@ -96,8 +96,12 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/icon/see.png"
   },
   {
-    "revision": "7e7fd524bff2b430af8a924bae7b6fad",
-    "url": "/json-mapping-front/img/icon/list.png"
+    "revision": "17850a078b8aa98f1b4360f5dac35c37",
+    "url": "/json-mapping-front/img/icon/list-white.png"
+  },
+  {
+    "revision": "da8857c4b5ff5228eda7b8bad5514750",
+    "url": "/json-mapping-front/img/icon/downloadqueue.png"
   },
   {
     "revision": "8f3082d40ef4c4f2e90c48c4f944d8af",
@@ -116,8 +120,8 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/css/chunk-vendors.6acb9ff2.css"
   },
   {
-    "revision": "55c9ec15e28807df6dfd",
-    "url": "/json-mapping-front/css/app.155521f0.css"
+    "revision": "48acabd088715b1ea97c",
+    "url": "/json-mapping-front/css/app.cca7c14d.css"
   },
   {
     "revision": "1d5fc7863e43c685d1ebcf517955ed62",
