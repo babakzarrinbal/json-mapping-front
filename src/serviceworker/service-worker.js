@@ -1,5 +1,5 @@
-workbox.core.skipWaiting();
-workbox.core.clientsClaim();
+// workbox.core.skipWaiting();
+// workbox.core.clientsClaim();
 
 workbox.precaching.precacheAndRoute([
   // "/json-mapping-front/workbox-v4.3.1/workbox-sw.js",
