@@ -1,4 +1,3 @@
-workbox.setConfig({ modulePathPrefix: "/json-mapping-front/workbox-v4.3.1", debug: false });
 workbox.core.skipWaiting();
 workbox.core.clientsClaim();
 
