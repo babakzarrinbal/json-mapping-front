@@ -1,18 +1,18 @@
-workbox.setConfig({ modulePathPrefix: "/aknoon/workbox-v4.3.1", debug: false });
+workbox.setConfig({ modulePathPrefix: "/json-mapping-front/workbox-v4.3.1", debug: false });
 workbox.core.skipWaiting();
 workbox.core.clientsClaim();
 
 workbox.precaching.precacheAndRoute([
-  "/aknoon/workbox-v4.3.1/workbox-sw.js",
-  "/aknoon/service-worker.js",
+  "/json-mapping-front/workbox-v4.3.1/workbox-sw.js",
+  "/json-mapping-front/service-worker.js",
   ...self.__precacheManifest.map(i => i.url)
 ]);
 
 workbox.routing.registerRoute(
-  /\.[png|jpg|svg|js|css]$/,
-  new workbox.strategies.CacheFirst()
+  /\.[png|jpg|svg|js|css|html|json]$/,
+  new workbox.strategies.NetworkFirst()
 );
-workbox.routing.registerRoute(/\.[html|json]$/, new workbox.strategies.NetworkFirst());
+// workbox.routing.registerRoute(/\.[]$/, new workbox.strategies.NetworkFirst());
 
 self.addEventListener("push", function(event) {
   let data, title, options;

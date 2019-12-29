@@ -36,12 +36,12 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/ttsicons/settings.svg"
   },
   {
-    "revision": "ce554f9aa15080bcf5d30af0549b0779",
-    "url": "/json-mapping-front/img/ttsicons/refresh.svg"
-  },
-  {
     "revision": "8181039b61cfc565659fa059c039e706",
     "url": "/json-mapping-front/img/ttsicons/plus.svg"
+  },
+  {
+    "revision": "ce554f9aa15080bcf5d30af0549b0779",
+    "url": "/json-mapping-front/img/ttsicons/refresh.svg"
   },
   {
     "revision": "7db92e62bee29459989694fb4526bc16",
@@ -52,12 +52,12 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/ttsicons/play-full.svg"
   },
   {
-    "revision": "e3eca74d0d77d7299725c27949c59ebd",
-    "url": "/json-mapping-front/img/loaders/rings.svg"
-  },
-  {
     "revision": "d8f8be8601d46e34d280ea4e44a5be1d",
     "url": "/json-mapping-front/img/loaders/puff.svg"
+  },
+  {
+    "revision": "e3eca74d0d77d7299725c27949c59ebd",
+    "url": "/json-mapping-front/img/loaders/rings.svg"
   },
   {
     "revision": "f7caff4f185c623ba45c02ab832f9c1f",
@@ -84,8 +84,8 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/icon/notsee.png"
   },
   {
-    "revision": "7e7fd524bff2b430af8a924bae7b6fad",
-    "url": "/json-mapping-front/img/icon/list.png"
+    "revision": "17850a078b8aa98f1b4360f5dac35c37",
+    "url": "/json-mapping-front/img/icon/list-white.png"
   },
   {
     "revision": "39153b06929a746eee884dd665ab0dc8",
@@ -96,8 +96,8 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/icon/see.png"
   },
   {
-    "revision": "17850a078b8aa98f1b4360f5dac35c37",
-    "url": "/json-mapping-front/img/icon/list-white.png"
+    "revision": "7e7fd524bff2b430af8a924bae7b6fad",
+    "url": "/json-mapping-front/img/icon/list.png"
   },
   {
     "revision": "da8857c4b5ff5228eda7b8bad5514750",
