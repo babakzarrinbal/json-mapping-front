@@ -3,8 +3,8 @@ workbox.core.skipWaiting();
 workbox.core.clientsClaim();
 
 workbox.precaching.precacheAndRoute([
-  "/json-mapping-front/workbox-v4.3.1/workbox-sw.js",
-  "/json-mapping-front/service-worker.js",
+  // "/json-mapping-front/workbox-v4.3.1/workbox-sw.js",
+  // "/json-mapping-front/service-worker.js",
   // ...self.__precacheManifest.map(i => i.url)
   ...self.__precacheManifest
 ]);

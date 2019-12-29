@@ -1,12 +1,12 @@
-importScripts("/json-mapping-front/precache-manifest.2b07437c80742897d76c60d721a5e26d.js", "/json-mapping-front/workbox-v3.6.3/workbox-sw.js");
+importScripts("/json-mapping-front/precache-manifest.3fe0c4b89a7c33f6fda017e5ef1e5018.js", "/json-mapping-front/workbox-v3.6.3/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "/json-mapping-front/workbox-v3.6.3"});
 workbox.setConfig({ modulePathPrefix: "/json-mapping-front/workbox-v4.3.1", debug: false });
 workbox.core.skipWaiting();
 workbox.core.clientsClaim();
 
 workbox.precaching.precacheAndRoute([
-  "/json-mapping-front/workbox-v4.3.1/workbox-sw.js",
-  "/json-mapping-front/service-worker.js",
+  // "/json-mapping-front/workbox-v4.3.1/workbox-sw.js",
+  // "/json-mapping-front/service-worker.js",
   // ...self.__precacheManifest.map(i => i.url)
   ...self.__precacheManifest
 ]);
