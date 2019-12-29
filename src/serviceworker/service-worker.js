@@ -5,13 +5,14 @@ workbox.core.clientsClaim();
 workbox.precaching.precacheAndRoute([
   "/json-mapping-front/workbox-v4.3.1/workbox-sw.js",
   "/json-mapping-front/service-worker.js",
-  ...self.__precacheManifest.map(i => i.url)
+  // ...self.__precacheManifest.map(i => i.url)
+  ...self.__precacheManifest
 ]);
 
-workbox.routing.registerRoute(
-  /\.[png|jpg|svg|js|css|html|json]$/,
-  new workbox.strategies.NetworkFirst()
-);
+// workbox.routing.registerRoute(
+//   /\.[png|jpg|svg|js|css|html|json]$/,
+//   new workbox.strategies.NetworkFirst()
+// );
 // workbox.routing.registerRoute(/\.[]$/, new workbox.strategies.NetworkFirst());
 
 self.addEventListener("push", function(event) {

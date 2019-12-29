@@ -44,20 +44,20 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/ttsicons/refresh.svg"
   },
   {
-    "revision": "7db92e62bee29459989694fb4526bc16",
-    "url": "/json-mapping-front/img/ttsicons/play.svg"
-  },
-  {
     "revision": "6ee7698493609851c684cc8b560084a7",
     "url": "/json-mapping-front/img/ttsicons/play-full.svg"
   },
   {
-    "revision": "d8f8be8601d46e34d280ea4e44a5be1d",
-    "url": "/json-mapping-front/img/loaders/puff.svg"
+    "revision": "7db92e62bee29459989694fb4526bc16",
+    "url": "/json-mapping-front/img/ttsicons/play.svg"
   },
   {
     "revision": "e3eca74d0d77d7299725c27949c59ebd",
     "url": "/json-mapping-front/img/loaders/rings.svg"
+  },
+  {
+    "revision": "d8f8be8601d46e34d280ea4e44a5be1d",
+    "url": "/json-mapping-front/img/loaders/puff.svg"
   },
   {
     "revision": "f7caff4f185c623ba45c02ab832f9c1f",
@@ -68,12 +68,12 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/js/app.ed295df8.js"
   },
   {
-    "revision": "20ca233e48ad5b5a127f6f1d86a4e4ef",
-    "url": "/json-mapping-front/img/ttsicons/minus.svg"
-  },
-  {
     "revision": "3a1311d5e71f7d0d9cf75005f1992426",
     "url": "/json-mapping-front/img/ttsicons/next.svg"
+  },
+  {
+    "revision": "20ca233e48ad5b5a127f6f1d86a4e4ef",
+    "url": "/json-mapping-front/img/ttsicons/minus.svg"
   },
   {
     "revision": "14b4111eac1e3e8aeaaee5e2d9685dc6",
