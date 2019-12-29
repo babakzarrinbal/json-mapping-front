@@ -248,7 +248,9 @@ export default {
       let key = this.selectedpath.slice(this.selectedpath.lastIndexOf(".") + 1);
       let newkey = window.prompt("Change The key?", key);
       if (newkey && key != newkey) {
-      let path = !this.selectedpath.includes(".") ? "":this.selectedpath.slice(0,this.selectedpath.lastIndexOf(".") + 1);
+        let path = !this.selectedpath.includes(".")
+          ? ""
+          : this.selectedpath.slice(0, this.selectedpath.lastIndexOf(".") + 1);
         await this.addProcedure(
           "fieldRename",
           {
@@ -257,22 +259,22 @@ export default {
           },
           "Rename feild @" + this.selectedpath
         );
-        this.selectedpath = path+ newkey;
+        this.selectedpath = path + newkey;
       }
-      let data = _.get(this.data,this.selectedpath);
+      let data = _.get(this.data, this.selectedpath);
       let stringdata;
-      try{
+      try {
         stringdata = JSON.stringify(data);
-      }catch(e){
+      } catch (e) {
         stringdata = data.toString();
       }
 
-      let newdata = window.prompt('Change The value?',stringdata);
-      if(newdata && newdata !=stringdata){
+      let newdata = window.prompt("Change The value?", stringdata);
+      if (newdata && newdata != stringdata) {
         this.addProcedure(
           "fieldSetContent",
           {
-            path: this.selectedpath ,
+            path: this.selectedpath,
             data: newdata.toString()
           },
           "Set content @" + this.selectedpath
@@ -327,7 +329,7 @@ export default {
     },
     async runProcedures() {
       await this.reset();
-      let startin = new Date();
+      let startin = Date.now();
       let i;
       for (i = 0; i < this.procedures.length; i++) {
         let p = this.procedures[i];
@@ -340,7 +342,9 @@ export default {
           break;
         }
         p.class = "primary";
+        // console.time();
         let result = await this.jmp.funcs[p.type](this.data, p.config, p);
+        // console.timeEnd();
         if (result) {
           p.class = "danger";
           p.error = result;
@@ -351,8 +355,8 @@ export default {
         }
         p.class = "success";
       }
-      this.proctime = i == this.procedures.length ? new Date() - startin : 0;
-      this.$forceUpdate();
+      this.proctime = i == this.procedures.length ? Date.now() - startin : 0;
+      await this.$forceUpdate();
     },
     // saveprocedures() {
     //   window.localStorage.setItem(

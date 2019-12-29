@@ -1,5 +1,5 @@
 var manifestJSON = require("./public/manifest.json");
-const webpack = require("webpack");
+// const webpack = require("webpack");
 // pwaArgs = {};
 module.exports = {
   productionSourceMap: false,
