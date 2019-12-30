@@ -10,12 +10,13 @@
     />
     <div class="body" style="position:relative">
       <div class="expand" @click="showprocs= !showprocs">{{showprocs ? " - " : " + "}}</div>
-      <div class="procedures list-group" v-if="showprocs">
-        <div class="row ml-1 w-100 d-block">
-          <!-- <div class="btn btn-secondary float-left mx-1" @click="saveprocedures()">Save</div>
+      <div class="procedures list-group position-relative pt-0" v-if="showprocs">
+        <!-- <div class="row ml-1 w-100 d-none">
+          <div class="btn btn-secondary float-left mx-1" @click="saveprocedures()">Save</div>
           <div class="btn btn-secondary float-left mx-1" @click="loadprocedures()">Load</div>-->
           <!-- <div class="btn btn-primary float-right mx-1" @click="">export</div>
-          <div class="btn btn-info float-right mx-1" @click="">import</div>-->
+          <div class="btn btn-info float-right mx-1" @click="">import</div>
+        </div> -->
           <input
             type="file"
             @change="createNewJson($event.target.files);"
@@ -23,8 +24,7 @@
             style="display:none;"
             ref="procin"
           />
-        </div>
-        <div class="actions">
+        <div class="actions position-sticky">
           <div class="btn btn-success" @click="addnewprocedure()">Add Step</div>
           <div class="btn btn-warning mx-1" @click="createNewJson()">Add Item</div>
           <div class="btn btn-danger" @click="reset()">Reset</div>
@@ -40,9 +40,12 @@
           :class="'list-group-item-'+(p||{}).class"
           @click="openprocededure = openprocededure == i ? null: i"
         >
+          <div class="row m-0">
           <span class="mr-2 clickable" @click.stop="moveSteps(i,i+1)">&#8681;</span>
           <span class="mr-2 clickable" @click.stop="moveSteps(i,i-1)">&#8679;</span>
           {{i}}: {{(p||{}).name}}
+          </div>
+          <div class="clearfix"/>
           <div
             class="btn btn-danger py-0 float-right ml-1"
             @click.stop="procedures = procedures.filter((p,index)=>i!=index);$forceUpdate();"
@@ -57,7 +60,7 @@
             @click.stop="openprocededure = null;(p||{}).edit=false;"
             v-if="(p||{}).edit"
           >save</div>
-
+          <div class="clearfix"/>
           <div class="procedure-detail" v-if="i == openprocededure" @click.stop>
             <div class="editinfo container">
               <div class="row mt-2" :title="(p.descriptions||{}).overall">
@@ -342,9 +345,9 @@ export default {
           break;
         }
         p.class = "primary";
-        // console.time();
+        // console.time(i +":"+p.name);
         let result = await this.jmp.funcs[p.type](this.data, p.config, p);
-        // console.timeEnd();
+        // console.timeEnd(i +":"+p.name);
         if (result) {
           p.class = "danger";
           p.error = result;
@@ -447,7 +450,15 @@ export default {
             obj = { inputdata: obj };
           }
           if (Array.isArray(obj) && obj.every(p => p.config && p.type)) {
-            _self.procedures = obj;
+            if(_self.procedures && _self.procedures.length){
+              if(window.confirm('Append?')){
+                _self.procedures.push(...obj);
+              }else{
+                _self.procedures = obj;
+              }
+            }else{
+              _self.procedures = obj;
+            }
           } else {
             _self.data[fn] = _.cloneDeep(obj);
             _self.defaultdata[fn] = obj;
@@ -497,7 +508,7 @@ export default {
   height: calc(100% - 30px);
 }
 .expand {
-  z-index: 9;
+  z-index: 1000;
   position: absolute;
   top: 5px;
   left: 5px;
@@ -604,6 +615,9 @@ export default {
   }
   .actions {
     padding: 10px;
+    top:0;
+    z-index: 9;
+    background-color: white;
   }
 }
 .clickable {
