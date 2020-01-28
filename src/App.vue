@@ -1,6 +1,7 @@
 <template>
   <div id="app" style="widht:100vw;height:100%;" @drop="createNewJson($event.dataTransfer.files)">
     <Header id="header" @openMenu="expandSettings = true" />
+    <transition name="menu">
     <Settings
       v-if="expandSettings"
       :data="Object.keys(data)"
@@ -8,8 +9,10 @@
       @Export="exportdata"
       @Import="$refs.procin.click()"
     />
+    </transition>
     <div class="body" style="position:relative">
       <div class="expand" @click="showprocs= !showprocs">{{showprocs ? " - " : " + "}}</div>
+      <transition name="proc">
       <div class="procedures list-group position-relative pt-0" v-if="showprocs">
         <!-- <div class="row ml-1 w-100 d-none">
           <div class="btn btn-secondary float-left mx-1" @click="saveprocedures()">Save</div>
@@ -124,6 +127,8 @@
           </div>
         </div>
       </div>
+      </transition>
+
       <div class="jsoncontainer">
         <div class="datajson" v-for="(d,k) in data" :key="k">
           <div class="actions">
@@ -510,12 +515,16 @@ export default {
 .expand {
   z-index: 1000;
   position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 20px;
-  height: 20px;
+  top: 0px;
+  left: 0px;
+  width: 30px;
+  height: 30px;
   background-color: gray;
   border-radius: 50%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
   cursor: pointer;
   user-select: none;
   color: white;
@@ -598,6 +607,7 @@ export default {
   padding: 10px;
   text-align: left;
   overflow: scroll;
+  transform-origin: 0 0;
   .procedure {
     margin-bottom: 10px;
     .procedure-detail {

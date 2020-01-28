@@ -1,5 +1,6 @@
 <template>
-  <div id="settings" @click="hideme()">
+  <div id="settings">
+    <div class="backoverlay"  @click="hideme()"></div>
     <div class="window position-relative" v-on:click.stop>
       <button type="button" class="close text-large" aria-label="Close" @click="hideme()">
         <span aria-hidden="true">&times;</span>
@@ -102,12 +103,19 @@ export default {
 <style scoped lang="scss">
 #settings {
   width: 100vw;
-  height: 100%;
-  position: fixed;
-  background-color: #8080805e;
-  top: 0;
-  right: 0;
-  z-index: 9999;
+    height: 100%;
+    top: 0;
+    position: fixed;
+    z-index: 9999;
+  .backoverlay{
+  width: 100vw;
+
+    height: 100%;
+    position: fixed;
+    background-color: #80808073;
+    top: 0;
+    right: 0;
+  }
   .window {
     float: left;
     height: 100%;

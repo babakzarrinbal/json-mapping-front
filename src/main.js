@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 // custom styles
 import "./scss/globalstyle.scss";
-// import "./scss/vue-transitions.scss";
+import "./scss/vue-transitions.scss";
 
 // fast click to disable touch delay
 var attachFastClick = require("fastclick");
