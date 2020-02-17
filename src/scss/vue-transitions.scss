@@ -138,3 +138,15 @@
 .proc-enter, .proc-leave-to /* .fade-leave-active below version 2.1.8 */ {
   transform: scale(0);
 }
+
+
+.collapse-leave, .collapse-leave-active, .collapse-enter-active{
+  transition: transform 0.3s 0s , height 0s 0.3s;
+    transform-origin: top center;
+    height: auto;
+}
+
+.collapse-enter, .collapse-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  transform: scaleY(0);
+  height:0;
+}

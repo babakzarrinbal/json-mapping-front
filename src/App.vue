@@ -2,24 +2,18 @@
   <div id="app" style="widht:100vw;height:100%;" @drop="createNewJson($event.dataTransfer.files)">
     <Header id="header" @openMenu="expandSettings = true" />
     <transition name="menu">
-    <Settings
-      v-if="expandSettings"
-      :data="Object.keys(data)"
-      @hide="expandSettings = false"
-      @Export="exportdata"
-      @Import="$refs.procin.click()"
-    />
+      <Settings
+        v-if="expandSettings"
+        :data="Object.keys(data)"
+        @hide="expandSettings = false"
+        @Export="exportdata"
+        @Import="$refs.procin.click()"
+      />
     </transition>
     <div class="body" style="position:relative">
       <div class="expand" @click="showprocs= !showprocs">{{showprocs ? " - " : " + "}}</div>
       <transition name="proc">
-      <div class="procedures list-group position-relative pt-0" v-if="showprocs">
-        <!-- <div class="row ml-1 w-100 d-none">
-          <div class="btn btn-secondary float-left mx-1" @click="saveprocedures()">Save</div>
-          <div class="btn btn-secondary float-left mx-1" @click="loadprocedures()">Load</div>-->
-          <!-- <div class="btn btn-primary float-right mx-1" @click="">export</div>
-          <div class="btn btn-info float-right mx-1" @click="">import</div>
-        </div> -->
+        <div class="procedures list-group position-relative p-0" v-if="showprocs">
           <input
             type="file"
             @change="createNewJson($event.target.files);"
@@ -27,106 +21,128 @@
             style="display:none;"
             ref="procin"
           />
-        <div class="actions position-sticky">
-          <div class="btn btn-success" @click="addnewprocedure()">Add Step</div>
-          <div class="btn btn-warning mx-1" @click="createNewJson()">Add Item</div>
-          <div class="btn btn-danger" @click="reset()">Reset</div>
-          <div
-            class="btn btn-info float-right"
-            @click="runProcedures()"
-          >Process:{{proctime ? proctime+" ms" : ""}}</div>
-        </div>
-        <div
-          class="p-1 list-group-item procedure"
-          v-for="(p,i) in procedures"
-          :key="i"
-          :class="'list-group-item-'+(p||{}).class"
-          @click="openprocededure = openprocededure == i ? null: i"
-        >
-          <div class="row m-0">
-          <span class="mr-2 clickable" @click.stop="moveSteps(i,i+1)">&#8681;</span>
-          <span class="mr-2 clickable" @click.stop="moveSteps(i,i-1)">&#8679;</span>
-          {{i}}: {{(p||{}).name}}
-          </div>
-          <div class="clearfix"/>
-          <div
-            class="btn btn-danger py-0 float-right ml-1"
-            @click.stop="procedures = procedures.filter((p,index)=>i!=index);$forceUpdate();"
-          >delete</div>
-          <div
-            class="btn btn-primary py-0 float-right"
-            @click.stop="openprocededure = i;(p||{}).edit=true;$forceUpdate();"
-            v-if="!(p||{}).edit"
-          >edit</div>
-          <div
-            class="btn btn-success py-0 float-right"
-            @click.stop="openprocededure = null;(p||{}).edit=false;"
-            v-if="(p||{}).edit"
-          >save</div>
-          <div class="clearfix"/>
-          <div class="procedure-detail" v-if="i == openprocededure" @click.stop>
-            <div class="editinfo container">
-              <div class="row mt-2" :title="(p.descriptions||{}).overall">
-                <div class="input-group input-group-sm mb-1 col-6 pr-0">
-                  <div class="input-group-prepend">
-                    <label
-                      class="bg-primary text-light input-group-text"
-                      for="inputGroupSelect01"
-                    >Action Type</label>
-                  </div>
-                  <select
-                    :disabled="!(p||{}).edit"
-                    class="custom-select"
-                    id="inputGroupSelect01"
-                    v-model="p.type"
-                    @change="setstepconfig(p)"
-                  >
-                    <option
-                      v-for="(t,index) in actiontypes"
-                      :key="index"
-                      :value="t"
-                      :disabled="t.slice(0,2)=='--'"
-                    >{{t}}</option>
-                  </select>
-                </div>
-                <div class="input-group input-group-sm mb-1 col-6">
-                  <div class="input-group-prepend">
-                    <span class="bg-warning text-light input-group-text" id="basic-addon1">Name</span>
-                  </div>
-                  <input
-                    :disabled="!(p||{}).edit"
-                    type="text"
-                    class="form-control"
-                    placeholder="Name"
-                    v-model="p.name"
-                  />
-                </div>
-                <h5 class="col-12 font-bold mb-2 pb-2 border-bottom border-dark"></h5>
-              </div>
-              <div class>Step action : {{p.type}}</div>
+          <div class="proceduresgroup card" style="max-height:100%;overflow:auto;" >
+            <div class="header  position-sticky card-header bg-info text-light p-2 clickable" style="top:0;z-index:99" @click="collapsed =!collapsed">
+              <span>groupname</span>
+              <span
+                class="float-right font-weight-bold pt-1"
+                style="font-size:35px;line-height:12px"
+                :class="{'collapsed':collapsed}"
+              >&rsaquo;</span>
               <div
-                class="input-group mb-1"
-                v-for="(c,ci) in p.config"
-                :key="ci"
-                :title="(p.descriptions||{})[ci]"
-              >
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">{{ci}}</span>
-                </div>
-                <textarea
-                  :disabled="!(p||{}).edit"
-                  type="text"
-                  class="configtextarea form-control"
-                  :placeholder="(p.descriptions||{})[ci] || ci"
-                  v-model="p.config[ci]"
-                />
-              </div>
-              <br />
-              {{p.error}}
+                    class="float-right mr-3 border px-2"
+                    @click.stop="runProcedures()"
+                  >Process:{{proctime ? proctime+" ms" : ""}}</div>
             </div>
+            <transition name="collapse">
+              <div class="steps card-body px-1 pt-0" v-if="!collapsed">
+                <div class="actions position-sticky">
+                  <div class="btn btn-success" @click="addnewprocedure()">Add Step</div>
+                  <div class="btn btn-warning mx-1" @click="createNewJson()">Add Item</div>
+                  <div class="btn btn-danger" @click="reset()">Reset</div>
+                  
+                </div>
+                <div
+                  class="p-1 list-group-item procedure"
+                  v-for="(p,i) in procedures"
+                  :key="i"
+                  :class="'list-group-item-'+(p||{}).class"
+                  @click="openprocededure = openprocededure == i ? null: i"
+                >
+                  <div class="row m-0">
+                    <span class="mr-2 clickable" @click.stop="moveSteps(i,i+1)">&#8681;</span>
+                    <span class="mr-2 clickable" @click.stop="moveSteps(i,i-1)">&#8679;</span>
+                    <span>{{i}}: {{(p||{}).name}}</span>
+                  </div>
+                  <div class="clearfix" />
+                  <div
+                    class="btn btn-danger py-0 float-right ml-1"
+                    @click.stop="procedures = procedures.filter((p,index)=>i!=index);$forceUpdate();"
+                  >delete</div>
+                  <div
+                    class="btn btn-warning py-0 float-left ml-1"
+                    @click.stop="addnewprocedure(p.type,p.config,p.name);$forceUpdate();"
+                  >duplicate</div>
+                  <div
+                    class="btn btn-primary py-0 float-right"
+                    @click.stop="openprocededure = i;(p||{}).edit=true;$forceUpdate();"
+                    v-if="!(p||{}).edit"
+                  >edit</div>
+                  <div
+                    class="btn btn-success py-0 float-right"
+                    @click.stop="openprocededure = null;(p||{}).edit=false;"
+                    v-if="(p||{}).edit"
+                  >save</div>
+                  <div class="clearfix" />
+                  <div class="procedure-detail" v-if="i == openprocededure" @click.stop>
+                    <div class="editinfo container">
+                      <div class="row mt-2" :title="(p.descriptions||{}).overall">
+                        <div class="input-group input-group-sm mb-1 col-6 pr-0">
+                          <div class="input-group-prepend">
+                            <label
+                              class="bg-primary text-light input-group-text"
+                              for="inputGroupSelect01"
+                            >Action Type</label>
+                          </div>
+                          <select
+                            :disabled="!(p||{}).edit"
+                            class="custom-select"
+                            id="inputGroupSelect01"
+                            v-model="p.type"
+                            @change="setstepconfig(p)"
+                          >
+                            <option
+                              v-for="(t,index) in actiontypes"
+                              :key="index"
+                              :value="t"
+                              :disabled="t.slice(0,2)=='--'"
+                            >{{t}}</option>
+                          </select>
+                        </div>
+                        <div class="input-group input-group-sm mb-1 col-6">
+                          <div class="input-group-prepend">
+                            <span
+                              class="bg-warning text-light input-group-text"
+                              id="basic-addon1"
+                            >Name</span>
+                          </div>
+                          <input
+                            :disabled="!(p||{}).edit"
+                            type="text"
+                            class="form-control"
+                            placeholder="Name"
+                            v-model="p.name"
+                          />
+                        </div>
+                        <h5 class="col-12 font-bold mb-2 pb-2 border-bottom border-dark"></h5>
+                      </div>
+                      <div class>Step action : {{p.type}}</div>
+                      <div
+                        class="input-group mb-1"
+                        v-for="(c,ci) in p.config"
+                        :key="ci"
+                        :title="(p.descriptions||{})[ci]"
+                      >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">{{ci}}</span>
+                        </div>
+                        <textarea
+                          :disabled="!(p||{}).edit"
+                          type="text"
+                          class="configtextarea form-control"
+                          :placeholder="(p.descriptions||{})[ci] || ci"
+                          v-model="p.config[ci]"
+                        />
+                      </div>
+                      <br />
+                      {{p.error}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </transition>
           </div>
         </div>
-      </div>
       </transition>
 
       <div class="jsoncontainer">
@@ -204,22 +220,36 @@
 import VueJsonPretty from "vue-json-pretty";
 import Header from "./components/header";
 import Settings from "./components/settings";
+import Procedure from "./components/procedure";
 const jmp = require("json-mapping-procedures");
 const _ = require("lodash");
 const actiontypes = Object.keys(jmp.config);
+
+let defaultdata = {},
+  procedures = [],
+  proceduregroups = [];
+
+let sproc = window.localStorage.getItem("json-mapper_procedures");
+let sdata = window.localStorage.getItem("json-mapper_data");
+if (sproc) procedures = JSON.parse(sproc);
+if (sdata) defaultdata = JSON.parse(sdata);
+
+let data = _.cloneDeep(defaultdata);
 export default {
   data() {
     return {
+      collapsed:true,
       window,
       expandSettings: false,
-      defaultdata: {},
-      data: {},
+      defaultdata,
+      data,
       selected: {},
       expanded: {},
       jmp,
       actiontypes,
       showprocs: true,
-      procedures: [],
+      procedures,
+      proceduregroups: [],
       openprocededure: null,
       proctime: 0,
       dblclick: 0,
@@ -229,7 +259,8 @@ export default {
   components: {
     VueJsonPretty,
     Header,
-    Settings
+    Settings,
+    Procedure
   },
   async created() {
     window.addEventListener(
@@ -300,11 +331,12 @@ export default {
       document.execCommand("copy");
       document.body.removeChild(el);
     },
-    addnewprocedure(type) {
+    addnewprocedure(type, data, name) {
       type = type || "fieldAdd";
       let { descriptions, ...config } = { ...this.jmp.config[type] };
+      if (data) config = _.cloneDeep(data);
       let newprocedure = {
-        name: type,
+        name: name || type,
         type,
         config,
         descriptions,
@@ -336,6 +368,14 @@ export default {
       // this.runProcedures();
     },
     async runProcedures() {
+      window.localStorage.setItem(
+        "json-mapper_procedures",
+        JSON.stringify(this.procedures)
+      );
+      window.localStorage.setItem(
+        "json-mapper_data",
+        JSON.stringify(this.data)
+      );
       await this.reset();
       let startin = Date.now();
       let i;
@@ -350,9 +390,9 @@ export default {
           break;
         }
         p.class = "primary";
-        // console.time(i +":"+p.name);
+        console.time(i + ":" + p.name);
         let result = await this.jmp.funcs[p.type](this.data, p.config, p);
-        // console.timeEnd(i +":"+p.name);
+        console.timeEnd(i + ":" + p.name);
         if (result) {
           p.class = "danger";
           p.error = result;
@@ -366,15 +406,6 @@ export default {
       this.proctime = i == this.procedures.length ? Date.now() - startin : 0;
       await this.$forceUpdate();
     },
-    // saveprocedures() {
-    //   window.localStorage.setItem(
-    //     "procedures",
-    //     JSON.stringify(this.procedures)
-    //   );
-    // },
-    // loadprocedures() {
-    //   this.procedures = JSON.parse(window.localStorage.getItem("procedures"));
-    // },
     moveSteps(old_index, new_index) {
       if (new_index >= this.procedures.length) new_index = 0;
       if (new_index == -1) new_index = this.procedures.length - 1;
@@ -455,13 +486,13 @@ export default {
             obj = { inputdata: obj };
           }
           if (Array.isArray(obj) && obj.every(p => p.config && p.type)) {
-            if(_self.procedures && _self.procedures.length){
-              if(window.confirm('Append?')){
+            if (_self.procedures && _self.procedures.length) {
+              if (window.confirm("Append?")) {
                 _self.procedures.push(...obj);
-              }else{
+              } else {
                 _self.procedures = obj;
               }
-            }else{
+            } else {
               _self.procedures = obj;
             }
           } else {
@@ -521,7 +552,7 @@ export default {
   height: 30px;
   background-color: gray;
   border-radius: 50%;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   font-size: 18px;
@@ -535,7 +566,6 @@ export default {
   display: flex;
   flex-grow: 1;
   max-height: 100%;
-
   flex-wrap: wrap;
   overflow: scroll;
   .datajson {
@@ -625,7 +655,7 @@ export default {
   }
   .actions {
     padding: 10px;
-    top:0;
+    top: 41px;
     z-index: 9;
     background-color: white;
   }
@@ -633,5 +663,10 @@ export default {
 .clickable {
   user-select: none;
   cursor: pointer;
+}
+.steps {
+  transition: transform 0.3s 0s, height 0s 0.3s;
+  transform-origin: top center;
+  height: auto;
 }
 </style>
