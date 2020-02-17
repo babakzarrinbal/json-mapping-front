@@ -21,11 +21,11 @@
             style="display:none;"
             ref="procin"
           />
-          <div class="proceduresgroup card" style="max-height:100%;overflow:auto;" >
+          <div class=" card" style="max-height:100%;overflow-y:scroll;" >
             <div class="header  position-sticky card-header bg-info text-light p-2 clickable" style="top:0;z-index:99" @click="collapsed =!collapsed">
-              <span>groupname</span>
+              <span>procedure</span>
               <span
-                class="float-right font-weight-bold pt-1"
+                class="collapse-arrow float-right font-weight-bold pt-1"
                 style="font-size:35px;line-height:12px"
                 :class="{'collapsed':collapsed}"
               >&rsaquo;</span>
@@ -36,10 +36,10 @@
             </div>
             <transition name="collapse">
               <div class="steps card-body px-1 pt-0" v-if="!collapsed">
-                <div class="actions position-sticky">
-                  <div class="btn btn-success" @click="addnewprocedure()">Add Step</div>
-                  <div class="btn btn-warning mx-1" @click="createNewJson()">Add Item</div>
-                  <div class="btn btn-danger" @click="reset()">Reset</div>
+                <div class="actions position-sticky p-1 pb-3">
+                  <div class="btn btn-success btn-sm py-0 clickable" @click="addnewprocedure()">Add Step</div>
+                  <div class="btn btn-warning btn-sm py-0 mx-1 clickable" @click="createNewJson()">Add Item</div>
+                  <div class="btn btn-danger btn-sm py-0 clickable" @click="reset()">Reset</div>
                   
                 </div>
                 <div
@@ -52,19 +52,19 @@
                   <div class="row m-0">
                     <span class="mr-2 clickable" @click.stop="moveSteps(i,i+1)">&#8681;</span>
                     <span class="mr-2 clickable" @click.stop="moveSteps(i,i-1)">&#8679;</span>
-                    <span>{{i}}: {{(p||{}).name}}</span>
+                    <span class="font-weight-bold">{{i}}: {{(p||{}).name}}</span>
                   </div>
                   <div class="clearfix" />
                   <div
-                    class="btn btn-danger py-0 float-right ml-1"
+                    class="btn btn-danger py-0 btn-sm  float-right ml-1"
                     @click.stop="procedures = procedures.filter((p,index)=>i!=index);$forceUpdate();"
                   >delete</div>
                   <div
-                    class="btn btn-warning py-0 float-left ml-1"
+                    class="btn btn-warning btn-sm  py-0 float-left ml-1"
                     @click.stop="addnewprocedure(p.type,p.config,p.name);$forceUpdate();"
                   >duplicate</div>
                   <div
-                    class="btn btn-primary py-0 float-right"
+                    class="btn btn-primary py-0 btn-sm  float-right"
                     @click.stop="openprocededure = i;(p||{}).edit=true;$forceUpdate();"
                     v-if="!(p||{}).edit"
                   >edit</div>
@@ -220,14 +220,14 @@
 import VueJsonPretty from "vue-json-pretty";
 import Header from "./components/header";
 import Settings from "./components/settings";
-import Procedure from "./components/procedure";
+// import Procedure from "./components/procedure";
 const jmp = require("json-mapping-procedures");
 const _ = require("lodash");
 const actiontypes = Object.keys(jmp.config);
 
 let defaultdata = {},
-  procedures = [],
-  proceduregroups = [];
+  procedures = [];
+  // proceduregroups = [];
 
 let sproc = window.localStorage.getItem("json-mapper_procedures");
 let sdata = window.localStorage.getItem("json-mapper_data");
@@ -238,7 +238,7 @@ let data = _.cloneDeep(defaultdata);
 export default {
   data() {
     return {
-      collapsed:true,
+      collapsed:false,
       window,
       expandSettings: false,
       defaultdata,
@@ -260,7 +260,7 @@ export default {
     VueJsonPretty,
     Header,
     Settings,
-    Procedure
+    // Procedure
   },
   async created() {
     window.addEventListener(
@@ -636,7 +636,7 @@ export default {
   max-width: 450px;
   padding: 10px;
   text-align: left;
-  overflow: scroll;
+  // overflow: scroll;
   transform-origin: 0 0;
   .procedure {
     margin-bottom: 10px;
@@ -668,5 +668,14 @@ export default {
   transition: transform 0.3s 0s, height 0s 0.3s;
   transform-origin: top center;
   height: auto;
+}
+.collapse-arrow{
+  transform:rotateZ(90deg);
+  transform-origin: center center;
+  transition: 0.3s;
+  &.collapsed{
+    transform:rotateZ(0);
+  }
+
 }
 </style>
