@@ -9,6 +9,7 @@
         @Export="exportdata"
         @Import="$refs.procin.click()"
         @clearAll="clearAll()"
+        style="z-index:99999;"
       />
     </transition>
     <div class="body" style="position:relative">
