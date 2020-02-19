@@ -37,7 +37,7 @@ export default {
       menuitems: [
         {
           title: "Install",
-          action:() => {window.install()},
+          action:() => {window.propforinstall()},
           customClass: "bg-success btn btn-success font-weight-bold"
         },
         {

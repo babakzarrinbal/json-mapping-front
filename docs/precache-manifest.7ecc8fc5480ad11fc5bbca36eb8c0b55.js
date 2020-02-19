@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/robots.txt"
   },
   {
-    "revision": "946009db60645ae0903ffb0e3d2625d1",
+    "revision": "f145eabc2a216ade6661f48ba6e8969a",
     "url": "/json-mapping-front/index.html"
   },
   {
@@ -36,12 +36,12 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/ttsicons/settings.svg"
   },
   {
-    "revision": "ce554f9aa15080bcf5d30af0549b0779",
-    "url": "/json-mapping-front/img/ttsicons/refresh.svg"
-  },
-  {
     "revision": "8181039b61cfc565659fa059c039e706",
     "url": "/json-mapping-front/img/ttsicons/plus.svg"
+  },
+  {
+    "revision": "ce554f9aa15080bcf5d30af0549b0779",
+    "url": "/json-mapping-front/img/ttsicons/refresh.svg"
   },
   {
     "revision": "6ee7698493609851c684cc8b560084a7",
@@ -64,16 +64,16 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/ttsicons/bookmark.svg"
   },
   {
-    "revision": "62d6986ae1ab3c23fe2c",
-    "url": "/json-mapping-front/js/app.026cb170.js"
-  },
-  {
-    "revision": "20ca233e48ad5b5a127f6f1d86a4e4ef",
-    "url": "/json-mapping-front/img/ttsicons/minus.svg"
+    "revision": "e4d93390e23bcb0faafc",
+    "url": "/json-mapping-front/js/app.23adc1d6.js"
   },
   {
     "revision": "3a1311d5e71f7d0d9cf75005f1992426",
     "url": "/json-mapping-front/img/ttsicons/next.svg"
+  },
+  {
+    "revision": "20ca233e48ad5b5a127f6f1d86a4e4ef",
+    "url": "/json-mapping-front/img/ttsicons/minus.svg"
   },
   {
     "revision": "14b4111eac1e3e8aeaaee5e2d9685dc6",
@@ -120,8 +120,8 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/css/chunk-vendors.6acb9ff2.css"
   },
   {
-    "revision": "62d6986ae1ab3c23fe2c",
-    "url": "/json-mapping-front/css/app.bacabe9a.css"
+    "revision": "e4d93390e23bcb0faafc",
+    "url": "/json-mapping-front/css/app.7f91feef.css"
   },
   {
     "revision": "1d5fc7863e43c685d1ebcf517955ed62",
