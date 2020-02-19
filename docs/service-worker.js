@@ -1,4 +1,4 @@
-importScripts("/json-mapping-front/precache-manifest.60acaec3bdd8bc81690f62ddc945e77e.js", "/json-mapping-front/workbox-v3.6.3/workbox-sw.js");
+importScripts("/json-mapping-front/precache-manifest.04e7e31c4c3db461b5e2ec151cde1933.js", "/json-mapping-front/workbox-v3.6.3/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "/json-mapping-front/workbox-v3.6.3"});
 // workbox.core.skipWaiting();
 // workbox.core.clientsClaim();

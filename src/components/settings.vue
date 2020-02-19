@@ -36,6 +36,11 @@ export default {
       newpass: null,
       menuitems: [
         {
+          title: "Install",
+          action:() => {window.install()},
+          customClass: "bg-success btn btn-success font-weight-bold"
+        },
+        {
           title: "Update/Reset",
           action: this.updateapp,
           customClass: "bg-warning font-weight-bold"
@@ -56,6 +61,7 @@ export default {
           action:() => {if(!window.confirm('Are you sure to delete All Info')) return;this.$emit("clearAll");this.hideme();},
           customClass: "bg-danger btn btn-danger font-weight-bold"
         },
+        
       ]
     };
   },
