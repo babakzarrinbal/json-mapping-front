@@ -40,16 +40,16 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/ttsicons/refresh.svg"
   },
   {
-    "revision": "7db92e62bee29459989694fb4526bc16",
-    "url": "/json-mapping-front/img/ttsicons/play.svg"
-  },
-  {
     "revision": "8181039b61cfc565659fa059c039e706",
     "url": "/json-mapping-front/img/ttsicons/plus.svg"
   },
   {
     "revision": "6ee7698493609851c684cc8b560084a7",
     "url": "/json-mapping-front/img/ttsicons/play-full.svg"
+  },
+  {
+    "revision": "7db92e62bee29459989694fb4526bc16",
+    "url": "/json-mapping-front/img/ttsicons/play.svg"
   },
   {
     "revision": "e3eca74d0d77d7299725c27949c59ebd",
