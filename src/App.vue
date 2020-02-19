@@ -8,12 +8,13 @@
         @hide="expandSettings = false"
         @Export="exportdata"
         @Import="$refs.procin.click()"
+        @clearAll="clearAll()"
       />
     </transition>
     <div class="body" style="position:relative">
       <div class="expand" @click="showprocs= !showprocs">{{showprocs ? " - " : " + "}}</div>
       <transition name="proc">
-        <div class="procedures list-group position-relative p-0" v-if="showprocs">
+        <div :style="'width:'+ viewWidth + '%'" class="h-100 procedures list-group position-relative p-0" v-if="showprocs">
           <input
             type="file"
             @change="createNewJson($event.target.files);"
@@ -21,12 +22,12 @@
             style="display:none;"
             ref="procin"
           />
-          <div class=" card" style="max-height:100%;overflow-y:scroll;" >
+          <div class=" card" style="max-height:100%;overflow-y:scroll;overflow-x:hidden;min-width:250px;" >
             <div class="header  position-sticky card-header bg-info text-light p-2 clickable" style="top:0;z-index:99" @click="collapsed =!collapsed">
               <span>procedure</span>
               <span
-                class="collapse-arrow float-right font-weight-bold pt-1"
-                style="font-size:35px;line-height:12px"
+                class="collapse-arrow float-right font-weight-bold"
+                style="font-size:35px;line-height:20px"
                 :class="{'collapsed':collapsed}"
               >&rsaquo;</span>
               <div
@@ -63,7 +64,7 @@
                     class="btn btn-warning btn-sm  py-0 float-left ml-1"
                     @click.stop="addnewprocedure(p.type,p.config,p.name);$forceUpdate();"
                   >duplicate</div>
-                  <div
+                  <!-- <div
                     class="btn btn-primary py-0 btn-sm  float-right"
                     @click.stop="openprocededure = i;(p||{}).edit=true;$forceUpdate();"
                     v-if="!(p||{}).edit"
@@ -72,7 +73,7 @@
                     class="btn btn-success py-0 float-right"
                     @click.stop="openprocededure = null;(p||{}).edit=false;"
                     v-if="(p||{}).edit"
-                  >save</div>
+                  >save</div> -->
                   <div class="clearfix" />
                   <div class="procedure-detail" v-if="i == openprocededure" @click.stop>
                     <div class="editinfo container">
@@ -84,8 +85,8 @@
                               for="inputGroupSelect01"
                             >Action Type</label>
                           </div>
+                            <!-- :disabled="!(p||{}).edit" -->
                           <select
-                            :disabled="!(p||{}).edit"
                             class="custom-select"
                             id="inputGroupSelect01"
                             v-model="p.type"
@@ -106,8 +107,8 @@
                               id="basic-addon1"
                             >Name</span>
                           </div>
+                            <!-- :disabled="!(p||{}).edit" -->
                           <input
-                            :disabled="!(p||{}).edit"
                             type="text"
                             class="form-control"
                             placeholder="Name"
@@ -127,7 +128,6 @@
                           <span class="input-group-text" id="basic-addon1">{{ci}}</span>
                         </div>
                         <textarea
-                          :disabled="!(p||{}).edit"
                           type="text"
                           class="configtextarea form-control"
                           :placeholder="(p.descriptions||{})[ci] || ci"
@@ -144,8 +144,8 @@
           </div>
         </div>
       </transition>
-
-      <div class="jsoncontainer">
+      <sizechanger @mousemove="sizechanger"/>
+      <div :style="'width:'+ (100 - viewWidth) + '%'" class="jsoncontainer">
         <div class="datajson" v-for="(d,k) in data" :key="k">
           <div class="actions">
             <div
@@ -220,6 +220,8 @@
 import VueJsonPretty from "vue-json-pretty";
 import Header from "./components/header";
 import Settings from "./components/settings";
+import sizechanger from "./components/sizechanger"
+// import initializing from "./components/initializing"
 // import Procedure from "./components/procedure";
 const jmp = require("json-mapping-procedures");
 const _ = require("lodash");
@@ -253,13 +255,15 @@ export default {
       openprocededure: null,
       proctime: 0,
       dblclick: 0,
-      selectedpath: ""
+      selectedpath: "",
+      viewWidth: 30
     };
   },
   components: {
     VueJsonPretty,
     Header,
     Settings,
+    sizechanger
     // Procedure
   },
   async created() {
@@ -395,6 +399,7 @@ export default {
         console.timeEnd(i + ":" + p.name);
         if (result) {
           p.class = "danger";
+          console.error(result);
           p.error = result;
           for (let j = i + 1; j < this.procedures.length; j++) {
             this.procedures[j].class = "warning";
@@ -518,7 +523,18 @@ export default {
       delete this.defaultdata[key];
       delete this.data[key];
       return this.$forceUpdate();
+    },
+    clearAll(){
+      this.defaultdata = {};
+      this.data = {};
+      this.procedures = [];
+       window.localStorage.removeItem("json-mapper_procedures");
+       window.localStorage.removeItem("json-mapper_data");
+    },
+    sizechanger(w){
+        this.viewWidth = w;
     }
+    
   },
   watch: {},
   computed: {}
@@ -571,9 +587,8 @@ export default {
   .datajson {
     position: relative;
     margin: 5px;
-    min-width: 300px;
-    max-width: calc(100% - 450px);
-    // min-height:100%;
+    min-width: 200px;
+    max-width: 100%;
     max-height: calc(100% - 20px);
     flex-grow: 1;
     flex-shrink: 0;
@@ -630,14 +645,10 @@ export default {
 }
 .procedures {
   border: 1px solid gray;
-  height: 100%;
-  width: 450px;
-  min-width: 450px;
-  max-width: 450px;
   padding: 10px;
   text-align: left;
-  // overflow: scroll;
-  transform-origin: 0 0;
+  overflow-x: hidden;
+  transform-origin: left 0;
   .procedure {
     margin-bottom: 10px;
     .procedure-detail {

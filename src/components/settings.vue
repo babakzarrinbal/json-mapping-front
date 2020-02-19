@@ -50,7 +50,12 @@ export default {
           action: () => this.$emit("Export","__All__"),
           children:exp,
           customClass: "font-weight-bold"
-        }
+        },
+        {
+          title: "clearAll",
+          action:() => {if(!window.confirm('Are you sure to delete All Info')) return;this.$emit("clearAll");this.hideme();},
+          customClass: "bg-danger btn btn-danger font-weight-bold"
+        },
       ]
     };
   },
