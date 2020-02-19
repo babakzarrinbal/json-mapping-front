@@ -12,8 +12,8 @@
       />
     </transition>
     <div class="body" style="position:relative">
-      <div class="expand" @click="showprocs= !showprocs">{{showprocs ? " - " : " + "}}</div>
-      <transition name="proc">
+      <!-- <div class="expand" @click="showprocs= !showprocs">{{showprocs ? " - " : " + "}}</div> -->
+
         <div :style="'width:'+ viewWidth + '%'" class="h-100 procedures list-group position-relative p-0" v-if="showprocs">
           <input
             type="file"
@@ -143,7 +143,7 @@
             </transition>
           </div>
         </div>
-      </transition>
+
       <sizechanger @mousemove="sizechanger"/>
       <div :style="'width:'+ (100 - viewWidth) + '%'" class="jsoncontainer">
         <div class="datajson" v-for="(d,k) in data" :key="k">

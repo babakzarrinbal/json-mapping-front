@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/robots.txt"
   },
   {
-    "revision": "a1a8bbf810062fa4a9dc1a285414fdb3",
+    "revision": "67c6583afdb70f0314e359828999e543",
     "url": "/json-mapping-front/index.html"
   },
   {
@@ -48,8 +48,8 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/ttsicons/play.svg"
   },
   {
-    "revision": "3a1311d5e71f7d0d9cf75005f1992426",
-    "url": "/json-mapping-front/img/ttsicons/next.svg"
+    "revision": "6ee7698493609851c684cc8b560084a7",
+    "url": "/json-mapping-front/img/ttsicons/play-full.svg"
   },
   {
     "revision": "d8f8be8601d46e34d280ea4e44a5be1d",
@@ -64,28 +64,24 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/ttsicons/bookmark.svg"
   },
   {
-    "revision": "4c75320980825d484d34",
-    "url": "/json-mapping-front/js/app.b8e89d95.js"
+    "revision": "4e90da08ffc8efddc86b",
+    "url": "/json-mapping-front/js/app.a1d15cab.js"
   },
   {
     "revision": "20ca233e48ad5b5a127f6f1d86a4e4ef",
     "url": "/json-mapping-front/img/ttsicons/minus.svg"
   },
   {
+    "revision": "3a1311d5e71f7d0d9cf75005f1992426",
+    "url": "/json-mapping-front/img/ttsicons/next.svg"
+  },
+  {
     "revision": "14b4111eac1e3e8aeaaee5e2d9685dc6",
     "url": "/json-mapping-front/img/ttsicons/pause.svg"
   },
   {
-    "revision": "6ee7698493609851c684cc8b560084a7",
-    "url": "/json-mapping-front/img/ttsicons/play-full.svg"
-  },
-  {
     "revision": "01711fa464361d1f2c5994e387288432",
     "url": "/json-mapping-front/img/icon/notsee.png"
-  },
-  {
-    "revision": "da8857c4b5ff5228eda7b8bad5514750",
-    "url": "/json-mapping-front/img/icon/downloadqueue.png"
   },
   {
     "revision": "17850a078b8aa98f1b4360f5dac35c37",
@@ -104,6 +100,10 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/img/icon/list.png"
   },
   {
+    "revision": "da8857c4b5ff5228eda7b8bad5514750",
+    "url": "/json-mapping-front/img/icon/downloadqueue.png"
+  },
+  {
     "revision": "8f3082d40ef4c4f2e90c48c4f944d8af",
     "url": "/json-mapping-front/db/movies/list/lastupdated/1.json.bak2"
   },
@@ -120,8 +120,8 @@ self.__precacheManifest = [
     "url": "/json-mapping-front/css/chunk-vendors.6acb9ff2.css"
   },
   {
-    "revision": "4c75320980825d484d34",
-    "url": "/json-mapping-front/css/app.0a7aaacf.css"
+    "revision": "4e90da08ffc8efddc86b",
+    "url": "/json-mapping-front/css/app.61a7a4e8.css"
   },
   {
     "revision": "1d5fc7863e43c685d1ebcf517955ed62",
